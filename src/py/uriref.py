@@ -1,12 +1,12 @@
-"""uriref - extensible URI parser.
+"""uriref - extensible URI parser based on ``re``.
 
-This code provides regular expressions to validate and parse Universal Resource 
-Identifiers as defined by (the BNF in) RFC 2396. 
+This code provides regular expressions to validate and parse Universal Resource
+Identifiers as defined by (the BNF in) RFC 2396.
 
-Each BNF term is translated to Python Regular Expression. The resulting set of 
-partial expressions are merged using string formatting and compiled into regex 
-object to match absolute and relative references, and some other parts of URIs 
-(URLs and URNs). This method does not provide the most optimized expressions, 
+Each BNF term is translated to Python Regular Expression. The resulting set of
+partial expressions are merged using string formatting and compiled into regex
+object to match absolute and relative references, and some other parts of URIs
+(URLs and URNs). This method does not provide the most optimized expressions,
 but is very precise and easy to work with.
 
 
@@ -21,7 +21,7 @@ terms in RFC 2396. Only the major terms are shown.
     ------------------------------------
               |
            hostname | IPv4address
-           ----------------------         *pchar *( ";" param ) 
+           ----------------------         *pchar *( ";" param )
                      |                    ---------------------
                    host [ ":" port ]               |
                    -----------------        *--------------*
@@ -55,8 +55,6 @@ terms in RFC 2396. Only the major terms are shown.
                                                |
                                                |
                                          URI-reference
-
-See: http://www.faqs.org/rfcs/rfc2396.html
 
 The only deviation between the RFC's BNF terms and the regular expressions groups
 is that the `net_path` *match group* is the `abs_path` of the `net_path` *BNF term*.
@@ -108,8 +106,8 @@ create an regex object as follows::
   mysql_link_expr = merge_strings(grouped_partial_expressions)['mysq_db_ref']
   mysql_link_re = re.compile(mysql_link_expr, re.VERBOSE)
 
-See above diagram or the RFC for the part names. Because the dictionary with 
-match-group IDs is used (and one is added, 'db'), this results in a match 
+See above diagram or the RFC for the part names. Because the dictionary with
+match-group IDs is used (and one is added, 'db'), this results in a match
 object with the following nicely named groups::
 
   __________<mysql://user:withpass@dbhost:3306/database>
@@ -165,19 +163,18 @@ Misc.
 
 References
 ----------
-.. [RFC 2396] `Uniform Resource Identifiers (URI): Generic Syntax`, 
+.. [RFC 2396] `Uniform Resource Identifiers (URI): Generic Syntax`,
               T. Berners-Lee et al., 1998 <http://tools.ietf.org/html/rfc2396>
-.. [RFC 3986] `Uniform Resource Identifiers (URI): Generic Syntax`, 
+.. [RFC 3986] `Uniform Resource Identifiers (URI): Generic Syntax`,
               T. Berners-Lee et al., 2005 <http://tools.ietf.org/html/rfc3986>
 
 """
 import re
-import pprint
 
 
 # Expressions
 """
-A dictionary of Regular Expressions as transcribed from RFC 2396 BNF, 
+A dictionary of Regular Expressions as transcribed from RFC 2396 BNF,
 parts are referenced using Python's string formatting notation.
 """
 partial_expressions = {
@@ -223,10 +220,10 @@ partial_expressions = {
 
 def merge_strings(strings):
     """
-    Format every string in dictionary `strings` using the same dictionary until 
+    Format every string in dictionary `strings` using the same dictionary until
     every string has been formatted (merged). Returns a dictionary with all
     string formatting references replaced.
-    
+
     Important! More than one non-existing formatting reference will cause an infinite loop.
     """
 
@@ -313,50 +310,38 @@ def match(uriref):
         return relativeURI.match(uriref)
 
 
-def urlparse(uriref):
-    """
-    Comparible with Python's stdlib urlparse, parse a URL into 6 components:
+#def urlparse(uriref):
+#    """
+#    Comparible with Python's stdlib urlparse, parse a URL into 6 components:
+#
+#        <scheme>://<netloc>/<path>;<params>?<query>#<fragment>
+#
+#    and no further split of the components. Returns tuple.
+#    """
+#
+#    md = match(uriref).groupdict()
+#
+#    auth = None
+#    if 'hostname' in md:
+#        auth = md['hostname']
+#        if 'userinfo' in md:
+#            auth = "%s@%s" % (md['userinfo'], auth)
+#        if 'port' in md:
+#            auth += ':%i' % md['port']
+#
+#    path = None
+#    if 'abs_path' in md:
+#        path = md['abs_path']
+#    elif 'net_path' in md:
+#        path = md['net_path']
+#
+#    last_params = None
+#
+#    return md['scheme'], auth, path, last_params, md['query'], md['fragment']
 
-        <scheme>://<netloc>/<path>;<params>?<query>#<fragment>
-
-    and no further split of the components. Returns tuple.
-    """
-
-    md = match(uriref).groupdict()
-
-    netloc = None
-    if 'hostname' in md:
-        netloc = md['hostname']
-        if 'userinfo' in md:
-            netloc = "%s@%s" % (md['userinfo'], netloc)
-        if 'port' in md:
-            netloc += ':%i' % md['port']
-
-    path = None
-    if 'abs_path' in md:
-        path = md['abs_path']
-    elif 'net_path' in md:
-        path = md['net_path']
-
-    last_params = None
-
-    return md['scheme'], netloc, path, last_params, md['query'], md['fragment']
-
-
-def is_uri(uristr):
-    """
-    TODO: uri.path can contains spaces... if this is restricted, is it possible
-    to deterimine if a random string is a valid reference (absolute or
-    relative/local)?
-    """
-
-    uri = URIRef(uristr)
-    if uri.scheme:
-        return True
-
-    elif uri.path:
-        print 'uri.path',uri.path
-        return True
+#URIREF_RE = r'^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?$'
+#URIREF_GROUPED_RE = r'^((?P<scheme>[^:/?#]+):)?(//(?P<authority>[^/?#]*))?(?P<path>[^?#]*)(\?(?P<query>[^#]*))?(#(?P<fragment>.*))?'
+#"Break-down well-formed URI reference into its components [RFC 3986]"
 
 
 # TODO: compare regex results against urlparse.urlsplit
@@ -430,80 +415,6 @@ def onsamedomain(url1, url2):
     return False
 
 
-
-class URIRef(str):
-
-    """
-    Convenience class with regular expression parsing of URI's and
-    formatting back to string representation again.
-    """
-
-    def __new__(type, *args, **kwds):
-        return str.__new__(type, *args)
-
-    def __init__(self, uri, opaque_targets=[]):
-        "Construct instance with match object and parts dictionary."
-        "`opaque_targets` indicates partnames which may 'default' to opaque_part."
-
-        str.__init__(uri)
-        self.__match__ = match(uri)
-        self.__groups__ = self.__match__.groupdict()
-
-        self.opaque_targets = opaque_targets
-        "The partnames that if not set get the value of opaque_part/"
-
-    @property
-    def query(self, *value):
-        return self.__groups__['query']
-
-    @property
-    def path(self, *value):
-        for path in 'abs_path', 'rel_path', 'net_path':
-            if path in self.__groups__ and self.__groups__[path]:
-                return self.__groups__[path]
-
-    def __getattr__(self, name):
-        part = None
-        if name in self.__groups__:
-            part = self.__groups__[name]
-        if not part and name in self.opaque_targets:
-            part = self.__groups__['opaque_part']
-        if not part and name == 'path':
-            part = self.path
-        return part
-
-    def generate_signature(self):
-        sig = []
-        if self.scheme:
-            sig.extend((self.scheme, ':'))
-
-        if self.host:
-            sig.append('//')
-            if self.userinfo:
-                sig.extend((self.userinfo, '@'))
-            sig.append(self.host)
-            if self.port:
-                sig.extend((':', self.port))
-
-        if self.path:
-            sig.append(self.path)
-        elif self.opaque_part:
-            sig.append(self.opaque_part)
-        else:
-            sig.append('/')
-
-        if self.query:
-            sig.extend(('?', self.query))
-        if self.fragment:
-            sig.extend(('#', self.fragment))
-
-        return tuple(sig)
-
-    def __repr__(self):
-        return "URIRef(%s)" % self
-
-    def __str__(self):
-        return "".join(self.generate_signature())
 
 
 

@@ -36,7 +36,7 @@ def match_groupdict_table(subject, match, show_empty=False):
 
     # sort and merge rows
     sorted_names = sort_match_groups(match)
-    rows = [rows[name] for name in sorted_names]
+    rows = [rows[name] for name in sorted_names if show_empty or name in rows]
 
     # append subject as header
     head = ("<%s>" % subject).rjust(row_length+1)

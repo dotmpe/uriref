@@ -1,7 +1,9 @@
 import uriref
 import unittest
 
-
+"""
+Single, simple test. Assert each URI is parsed to the expected parts.
+"""
 fictional_urls = [
     ( 'file:/simple/path/to/file.ext',
     {'opaque_part': None, 'abs_path': '/simple/path/to/file.ext', 'fragment': None,
@@ -130,11 +132,12 @@ class TestModule(unittest.TestCase):
         for i in xrange(0, len(fictional_urls)):
             url, expected = fictional_urls[i]
             groups = uriref.match(url).groupdict()
+            print 'Testing input %s' % url
             self.assertEqual(expected, groups)
 
-class TestURIRef(unittest.TestCase):
-    def test_1(self):
-        pass
+#class TestURIRef(unittest.TestCase):
+#    def test_1(self):
+#        pass
 
 
 if __name__ == '__main__':

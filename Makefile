@@ -1,6 +1,7 @@
 .PHONY: help all test
 
 help:
+	@echo 'nothing to do'
 
 all:
 
