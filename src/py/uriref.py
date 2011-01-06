@@ -417,6 +417,21 @@ def onsamedomain(url1, url2):
 
 
 
+def bug1():
+    "http://host"
+    m = absoluteURI.match("my://host/path")
+    gd = m.groupdict()
+    # problem 1, what should the net path be?
+    assert gd['net_path'] == '/path'
+    # my guess:
+    #assert gd['net_path'] == '//host/path', gd
+
+    # problem 2, this be a hostname:
+    m = absoluteURI.match("my://net")
+    gd = m.groupdict()
+    #assert gd['host'] == 'net', gd
+    # and possibly related:
+    assert gd['net_path'] == '//net', gd
 
 def print_complete_expressions():
     print "**relativeURI**::\n\t", r"^%(relativeURI)s(\# (?P<fragment> %(fragment)s))?$" % expressions
@@ -434,4 +449,5 @@ def print_complete_expressions():
 
 
 if __name__ == '__main__':
+    bug1()
     print_complete_expressions()
