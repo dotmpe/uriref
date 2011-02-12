@@ -72,19 +72,20 @@ if __name__ == '__main__':
     import sys
 
     uris = sys.argv[1:]
-    if not uris:
-        uris.insert(0, 'http://usr@sub.example.org:4321/path;with-param/to/service.ext?arg&q=v;and=v2#somefragment')
+    status = 0
+    if not sys.argv[1:]:
+        status = 1
+        print "Usage:\n\t% parseuri uriref1 [uriref2 ...]"
+        print
+        print 'Examples'
+        print '-' * 79
         uris.insert(0, '//example.org/path?v=1')
-        uris.insert(0, '../path#id')
-        uris.insert(0, 'some-id@example.org')
+        #uris.insert(0, '../path#id') XXX rel-part testing!
+        uris.insert(0, '//path.ext;param#id')
+        uris.insert(0, './../path.ext;param#id')
         uris.insert(0, 'cid:some-content-id@example.org')
-        uris.insert(0, 'urn:/path')
-        uris.insert(0, 'urn:root')
 
     for uri in uris:
         print_regex_table(uri)
 
-    if not sys.argv[1:]:
-        print "Usage: parseuri uriref1 uriref2 ..."
-        sys.exit(1)
-
+    sys.exit(status)

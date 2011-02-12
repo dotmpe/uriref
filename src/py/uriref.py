@@ -416,6 +416,82 @@ def onsamedomain(url1, url2):
 
 
 
+class URIRef(str):
+
+	"""
+	Convenience class with regular expression parsing of URI's and
+	formatting back to string representation again.
+	"""
+
+	def __new__(type, *args, **kwds):
+		return str.__new__(type, *args)
+
+	def __init__(self, uri, opaque_targets=[]):
+		"Construct instance with match object and parts dictionary."
+		"`opaque_targets` indicates partnames which may 'default' to opaque_part."
+
+		str.__init__(uri)
+		self.__match__ = match(uri)
+		self.__groups__ = self.__match__.groupdict()
+
+		self.opaque_targets = opaque_targets
+		"The partnames that if not set get the value of opaque_part/"
+
+	@property
+	def query(self, *value):
+		return self.__groups__['query']
+
+	@property
+	def path(self, *value):
+		for path in 'abs_path', 'rel_path', 'net_path':
+			if path in self.__groups__ and self.__groups__[path]:
+				return self.__groups__[path]
+
+	def __getattr__(self, name):
+		part = None
+		if name in self.__groups__:
+			part = self.__groups__[name]
+		if not part and name in self.opaque_targets:
+			part = self.__groups__['opaque_part']
+		if not part and name == 'path':
+			part = self.path
+		return part
+
+	def generate_signature(self):
+		sig = []
+		if self.scheme:
+			sig.extend((self.scheme, ':'))
+
+		if self.host:
+			sig.append('//')
+			if self.userinfo:
+				sig.extend((self.userinfo, '@'))
+			sig.append(self.host)
+			if self.port:
+				sig.extend((':', self.port))
+
+		if self.path:
+			sig.append(self.path)
+		elif self.opaque_part:
+			sig.append(self.opaque_part)
+		else:
+			sig.append('/')
+
+		if self.query:
+			sig.extend(('?', self.query))
+		if self.fragment:
+			sig.extend(('#', self.fragment))
+
+		return tuple(sig)
+
+	def __repr__(self):
+		return "URIRef(%s)" % self
+
+	def __str__(self):
+		return "".join(self.generate_signature())
+
+
+### Testing
 
 def bug1():
     "http://host"
