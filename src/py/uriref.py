@@ -1,4 +1,5 @@
-"""uriref - extensible URI parser based on ``re``.
+"""
+uriref - extensible URI parser based on ``re``.
 
 This code provides regular expressions to validate and parse Universal Resource
 Identifiers as defined by (the BNF in) RFC 2396.
@@ -9,6 +10,12 @@ object to match absolute and relative references, and some other parts of URIs
 (URLs and URNs). This method does not provide the most optimized expressions,
 but is very precise and easy to work with.
 
+The project started as an exercise and out of curiosity to the exact patterns 
+and validation of URI references.
+The regex implementation runs up to twice as fast as the standard implementation 
+for URI parsing.
+
+The current naming of groups or URI parts needs some work
 
 Uniform Resource Indicator parts
 --------------------------------
@@ -160,12 +167,13 @@ Misc.
 - TODO: better parsing of paths, parameters, testing.
 - XXX: stdlib 'urlparse' only allows parameters on the last path segment.
 - TODO: update to RFC 3986
+   
 
 References
 ----------
-.. [RFC 2396] `Uniform Resource Identifiers (URI): Generic Syntax`,
+.. [RFC_2396] `Uniform Resource Identifiers (URI): Generic Syntax`,
               T. Berners-Lee et al., 1998 <http://tools.ietf.org/html/rfc2396>
-.. [RFC 3986] `Uniform Resource Identifiers (URI): Generic Syntax`,
+.. [RFC_3986] `Uniform Resource Identifiers (URI): Generic Syntax`,
               T. Berners-Lee et al., 2005 <http://tools.ietf.org/html/rfc3986>
 
 """
