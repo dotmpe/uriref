@@ -1,4 +1,6 @@
 """
+Either run cProfile and report, or with `-cvs` flag print ','-separated times
+for 10, 100, 1000, 10000 and 100000 iterations.
 """
 import urllib
 import uriref

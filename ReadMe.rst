@@ -10,10 +10,12 @@ Python uriref
 .. figure:: profiling-results.svg
    :width: 45em
    :height: 55em
+   :class: diagram
 
-   uriref reference matching, compared to stdlib urlparse
+   uriref reference matching, compared to stdlib urlparse for several
+   iteration-counts.
 
-   The regex implementation runs up to twice as fast as the standard
+   Looks like it is running up to twice as fast as the standard
    implementation for URI parsing.
 
 

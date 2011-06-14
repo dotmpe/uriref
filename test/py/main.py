@@ -17,9 +17,18 @@ class TestModule(unittest.TestCase):
             self.assertEqual(expected, groups)
 
 class TestAgainstStdLib(unittest.TestCase):
+
     def test_1(self):
-        for i in xrange(0, len(fictional_urls)):
-            url, expected = fictional_urls[i]
+        self.assert_(fictional_urls)
+        self._test(fictional_urls)
+
+    def test_2(self):
+        self.assert_(out_in_the_wild_urls)
+        self._test(out_in_the_wild_urls)
+
+    def _test(self, urls):
+        for i in xrange(0, len(urls)):
+            url, expected = urls[i]
             parsed = urlparse.urlparse(url)
             if hasattr(parsed,'params'):
                 # params are not parsed by current urlref
