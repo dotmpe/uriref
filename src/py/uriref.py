@@ -519,7 +519,7 @@ class URIRef(str):
 				sig.extend((self.userinfo, '@'))
 			sig.append(self.host)
 			if self.port:
-				sig.extend((':', self.port))
+				sig.extend((':', str(self.port)))
 
 		if self.path:
 			sig.append(self.path)
