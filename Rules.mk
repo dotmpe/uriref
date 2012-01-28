@@ -4,7 +4,7 @@ MK                  += $(MK_$d)
 #
 #      ------------ -- 
 
-SRC_$d              := $/src/py/uriref.py
+SRC_$d              := $/uriref/__init__.py
 
 TRGT_$d             := \
 	$/profiling_urllib-comparison_.py
@@ -14,9 +14,7 @@ DMK_$d              :=
 
 define python-urllib-profile 
 	if test ! -e $(BUILD); then mkdir $(BUILD); fi
-	cd bin;\
-	PYTHONPATH=../src/py \
-	python ../test/py/profile.py -csv | tee ../$(BUILD)/profile-results.csv
+	python test/py/profile.py -csv | tee $@
 endef
 
 #      ------------ -- 
@@ -24,26 +22,39 @@ endef
 TEST_$d             += profile_$d
 .PHONY:                profile_$d
 
-profile_$d:: profiling-results.png profiling-results.svg
+profile_$d:: $/doc/stdlib-comparison.png $/doc/stdlib-comparison.svg
 
-$Bprofile-results.csv::
+$/doc/stdlib-comparison.svg $/doc/stdlib-comparison.png: $Bstdlib-comparison.csv
+
+$Bstdlib-comparison.csv: $(SRC_$d) $/Rules.mk $/Makefile
+	@$(call log_line,info,$@,..);\
 	$(python-urllib-profile)
+	@$(call log_line,ok,$@)
 
-profiling-results.svg profiling-results.png: $Bprofile-results.csv
-	cd bin; python plot-profile.py 
-	mv bin/profiling-results.* ./
+$/doc/%.svg $/doc/%.png: DIR := $/
+$/doc/%.svg $/doc/%.png: $B%.csv
+	@$(call log_line,info,$@,..);\
+	cd $(DIR); python bin/plot-profile.py $< $(@D)/$*
+	@$(call log_line,ok,$@)
 
 #      ------------ -- 
 #
 TEST_$d             += test_$d
 .PHONY:                test_$d
 
+test_$d: DIR := $/
 test_$d:
 	@$(call log_line,info,$@,Starting tests..)
 	@\
+	cd $(DIR);\
 	PYTHONPATH=$$PYTHONPATH:src/py:test/py;\
 	TEST_PY=test/py/main.py;TEST_LIB=uriref;\
-    $(test-python)
+    $(test-python);
+	@\
+	cd $(DIR);\
+    [ -e htmlcov ] && mv htmlcov doc && rm .coverage;\
+    [ -e uriref_testreport.html ] && mv uriref_testreport.html doc;
+	@$(call log_line,ok,$@)
 
 
 #      ------------ -- 
@@ -56,9 +67,8 @@ test_$d:
 #      ------------ -- 
 #
 CLN_$d              := \
-	$(shell find $/ -name '.coverage') \
 	$(shell find $/ -name '*.pyc') \
-	$(shell find $/htmlcov -type f)
+	$(wildcard .coverage htmlcov dist MANIFEST)
 
 
 #      ------------ -- 

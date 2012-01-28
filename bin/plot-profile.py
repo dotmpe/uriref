@@ -10,8 +10,10 @@ from pylab import std, mean
 from matplotlib.mlab import csv2rec, rec2csv
 #, rec2gtk
 
+import sys
 
-datafile = '../.build/profile-results.csv'
+datafile = sys.argv[1]
+output_basename = sys.argv[2]
 r = csv2rec(datafile, checkrows=0)
 
 data = dict(
@@ -45,8 +47,6 @@ for iterations in groups:
 #for x,y in pairs:
 #    print 'mean=%1.2f, std=%1.2f, r=%1.2f'%(mean(y), std(y),
 #            corrcoef(x,y)[0][1])
-
-print dataPairs, stdPairs
 
 #scroll = rec2gtk(r, formatd=formatd)
 #
@@ -106,6 +106,6 @@ def autolabel(rects):
 #ax.set_yscale('log')
 #plt.ylim(0.001, 1000)
 #plt.show()
-plt.savefig('profiling-results.png', format='png')
-plt.savefig('profiling-results.svg', format='svg')
+plt.savefig(output_basename+'.png', format='png')
+plt.savefig(output_basename+'.svg', format='svg')
 
