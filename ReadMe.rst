@@ -5,7 +5,11 @@ Python uriref
 :Description:
   URL and URN parser written in regular expressions. 
   Based on RFC 2396 BNF terms, update to RFC 3986 planned but not started.
+:License: MIT
 
+This is an experimental library. Do not use it in production unless you are
+prepared to put in considerable time for testing that it does what you need.
+MIT License and warranties apply.
 
 .. figure:: profiling-results.svg
    :width: 45em
@@ -13,12 +17,10 @@ Python uriref
    :class: diagram
 
    uriref reference matching, compared to stdlib urlparse for several
-   iteration-counts.
+   iteration-counts. The implementations are not tested for identical
+   operation though.
 
-   Looks like it is running up to twice as fast as the standard
-   implementation for URI parsing.
-
-
+`Coverage report`_ is available in html.
 See `uriref <src/py/uriref.py>`__.
 
 .. .. include:: src/py/uriref.py

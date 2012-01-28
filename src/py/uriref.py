@@ -189,6 +189,8 @@ References
 
 """
 import re
+import urlparse as stdlib_urlparse
+
 
 
 # Expressions
@@ -346,34 +348,43 @@ def match(uriref):
 		return relativeURI.match(uriref)
 
 
-#def urlparse(uriref):
-#	"""
-#	Comparible with Python's stdlib urlparse, parse a URL into 6 components:
-#
-#		<scheme>://<netloc>/<path>;<params>?<query>#<fragment>
-#
-#	and no further split of the components. Returns tuple.
-#	"""
-#
-#	md = match(uriref).groupdict()
-#
-#	auth = None
-#	if 'hostname' in md:
-#		auth = md['hostname']
-#		if 'userinfo' in md:
-#			auth = "%s@%s" % (md['userinfo'], auth)
-#		if 'port' in md:
-#			auth += ':%i' % md['port']
-#
-#	path = None
-#	if 'abs_path' in md:
-#		path = md['abs_path']
-#	elif 'net_path' in md:
-#		path = md['net_path']
-#
-#	last_params = None
-#
-#	return md['scheme'], auth, path, last_params, md['query'], md['fragment']
+def urlparse(uriref, md=None):
+	"""
+	Comparible with Python's stdlib urlparse, parse a URL into 6 components:
+
+		<scheme>://<netloc>/<path>;<params>?<query>#<fragment>
+
+	and no further split of the components. Returns tuple.
+	"""
+
+	if not md:
+		md = match(uriref).groupdict()
+
+	if 'scheme' not in md:
+		md['scheme'] = None
+
+	auth = ''
+	if 'hostname' in md:
+		auth = md['hostname']
+		if 'userinfo' in md:
+			auth = "%s@%s" % (md['userinfo'], auth)
+		if 'port' in md:
+			auth += ':%i' % md['port']
+
+	path = ''
+	if 'abs_path' in md:
+		path = md['abs_path']
+	elif 'net_path' in md:
+		path = md['net_path']
+
+	params = ''
+
+	return stdlib_urlparse.ParseResult(
+	        md['scheme'] or '',
+	        auth, path, params, 
+	        md['query'] or '',
+	        md['fragment'] or ''
+        )
 
 #URIREF_RE = r'^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?$'
 #URIREF_GROUPED_RE = r'^((?P<scheme>[^:/?#]+):)?(//(?P<authority>[^/?#]*))?(?P<path>[^?#]*)(\?(?P<query>[^#]*))?(#(?P<fragment>.*))?'
@@ -383,19 +394,18 @@ def match(uriref):
 # TODO: compare regex results against urlparse.urlsplit
 
 ### URI parsing based on urlparse
-import urlparse
 
 def isfragment(url, location=None):
 
 	"""Return true if URL links to a fragment.
 	"""
 
-	urlparts = urlparse.urlsplit(url)
+	urlparts = stdlib_urlparse.urlsplit(url)
 	if not location and not urlparts[4] is None:
 		return False
 
 	elif location and urlparts[4]:
-		locparts = urlparse.urlsplit(location)
+		locparts = stdlib_urlparse.urlsplit(location)
 		# scheme
 		if urlparts[0] and not urlparts[0] is locparts[0]:
 			return False
@@ -420,7 +430,7 @@ def get_hostname(url):
 	"""Return the hostname of the given `url`.
 	"""
 
-	hostname = urlparse.urlsplit(url)[1]
+	hostname = stdlib_urlparse.urlsplit(url)[1]
 	if ':' in hostname:
 		hostname = hostname.split(':').pop(0)
 	return hostname
@@ -431,8 +441,8 @@ def onsamedomain(url1, url2):
 	domain (but perhaps in a different subdomain).
 	"""
 
-	url1parts = urlparse.urlsplit(url1)
-	url2parts = urlparse.urlsplit(url2)
+	url1parts = stdlib_urlparse.urlsplit(url1)
+	url2parts = stdlib_urlparse.urlsplit(url2)
 	host1, host2 = url1parts[1], url2parts[1]
 	host1, host2 = host1.split('.'), host2.split('.')
 

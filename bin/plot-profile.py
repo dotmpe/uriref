@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # a bar plot with errorbars
 import numpy as npy
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from pylab import std, mean
 
@@ -9,10 +11,11 @@ from matplotlib.mlab import csv2rec, rec2csv
 #, rec2gtk
 
 
-datafile = '../tmp/profile-results.csv'
+datafile = '../.build/profile-results.csv'
 r = csv2rec(datafile, checkrows=0)
 
 data = dict(
+    stdlib=dict(),
     uriref=dict(),
     urlparse=dict())
 
@@ -21,29 +24,29 @@ r.sort()
 for l in r:
     l = list(l)
     lib, tests, iterations = l[:3]
-    if iterations not in data[lib]:
-        data[lib][iterations] = {}
+    #if iterations not in data[lib]:
+    #    data[lib][iterations] = {}
     data[lib][iterations] = l[3:]
 
 
 stdPairs = [[],[]]
 dataPairs = [[],[]]
-groups = data['urlparse'].keys()
+groups = data['stdlib'].keys()
 groups.sort()
 for iterations in groups:
-	urlparse_times = data['urlparse'][iterations]
+	urlparse_times = data['stdlib'][iterations]
 	uriref_times = data['uriref'][iterations]
 
-	dataPairs[0].append(mean(uriref_times))
-	dataPairs[1].append(mean(urlparse_times))
-	stdPairs[0].append (std(uriref_times))
-	stdPairs[1].append (std(urlparse_times))
+	dataPairs[0].append(mean(uriref_times)/iterations)
+	dataPairs[1].append(mean(urlparse_times)/iterations)
+	stdPairs[0].append(std(uriref_times)/iterations)
+	stdPairs[1].append(std(urlparse_times)/iterations)
 
 #for x,y in pairs:
 #    print 'mean=%1.2f, std=%1.2f, r=%1.2f'%(mean(y), std(y),
 #            corrcoef(x,y)[0][1])
 
-#print dataPairs, stdPairs
+print dataPairs, stdPairs
 
 #scroll = rec2gtk(r, formatd=formatd)
 #
@@ -86,7 +89,7 @@ ax.set_xticklabels( groups )
 
 ax.legend( 
     (rects1[0], rects2[0]), 
-    ( 'urlparse','uriref',) )
+    ( 'stdlib','uriref',) )
 
 def autolabel(rects):
     # attach some text labels
@@ -99,7 +102,7 @@ def autolabel(rects):
 #autolabel(rects2)
 
 
-plt.ylim(0.001, 100)
+#plt.ylim(0.001, 100)
 #ax.set_yscale('log')
 #plt.ylim(0.001, 1000)
 #plt.show()

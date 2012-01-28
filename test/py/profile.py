@@ -15,6 +15,7 @@ def uriref_test(cycles):
         for i in xrange(0, len(fictional_urls)):
             url, expected = fictional_urls[i]
             parsed = uriref.match(url).groupdict()
+
 def stdlib_test(cycles):
     for x in xrange(0, cycles):
         for i in xrange(0, len(fictional_urls)):
@@ -27,7 +28,7 @@ if '-csv' in sys.argv:
     print "Test name, URI-reference count, Iterations, Time1, Time2, Time3, Time4"
     p = cProfile.Profile()
     p.enable(False, False)
-    for i in (10, 100, 1000, 10000, 100000):
+    for i in (10, 100, 1000):#, 10000):#, 100000):
         for fn in ('uriref', 'stdlib'):
             mean = []
             for m in (1, 2, 3, 4):
@@ -43,7 +44,9 @@ if '-csv' in sys.argv:
 else:
     print "uriref RegEx implementation: "
 #cProfile.run("uriref_test(10000)")
-    cProfile.run("uriref_test(1000000)")
+    cProfile.run("uriref_test(10)")
+    cProfile.run("uriref_test(10)")
     print "Stdlib:"
 #cProfile.run("stdlib_test(10000)")
-    cProfile.run("stdlib_test(1000000)")
+    cProfile.run("stdlib_test(10)")
+    cProfile.run("stdlib_test(10)")

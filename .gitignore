@@ -1,0 +1,7 @@
+/htmlcov
+/.coverage
+/.build
+/uriref_testreport.html
+*.sw[po]
+*.pyc
+*.png

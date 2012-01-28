@@ -114,9 +114,16 @@ fictional_urls = [
     ( 'irc://host/channel',
     {'opaque_part': None, 'abs_path': None, 'fragment': None, 'authority': 'host',
             'net_path': '/channel', 'host': 'host', 'userinfo': None, 'query': None,
-            'scheme': 'irc', 'port': None})]
+            'scheme': 'irc', 'port': None})
+]
 
-out_in_the_wild_urls = []
+out_in_the_wild_urls = [
+    ( '//host.name/channel',
+    {'opaque_part': None, 'abs_path': None, 'fragment': None, 'authority':
+        'host.name',
+            'net_path': '/channel', 'host': 'host.name', 'userinfo': None, 'query': None,
+            'port': None, 'rel_path': None })
+]
 
 invalid_urls = []
 
