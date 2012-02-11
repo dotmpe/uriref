@@ -10,7 +10,7 @@ object to match absolute, relative references, and other parts of URIs
 (URLs and URNs). This method does not provide the most optimized expressions,
 but is very precise and easy to work with.
 
-The project started as an exercise and out of curiosity to the exact patterns 
+The project started as an exercise and out of curiosity to the exact patterns
 and validation of URI references.
 This implementation runs up to twice as fast as Python's standard implementation
 for URI parsing (`urlparse`).
@@ -85,8 +85,8 @@ Most importantly, this module provides the compiled expressions `relativeURI`
 and `absoluteURI` to match the respective reference notations. Function `match`
 takes any reference and uses the compiled expression `scheme` to determine
 if the string represents a relative or absolute reference.
-New RegEx objects (to match other identifer(s)-parts) my be created using string 
-formatting. All partial expressions (mostly translated BNF terms) reside in 
+New RegEx objects (to match other identifer(s)-parts) my be created using string
+formatting. All partial expressions (mostly translated BNF terms) reside in
 `partial_expressions`, while `grouped_partial_expressions` adds Id's for some
 groups. `merge_strings` is a function to merge the partial expressions into a
 complete RegEx string.
@@ -178,7 +178,7 @@ Misc.
 - TODO: better parsing of paths, parameters, testing.
 - XXX: stdlib 'urlparse' only allows parameters on the last path segment.
 - TODO: update to RFC 3986
-   
+
 
 References
 ----------
@@ -329,6 +329,10 @@ scheme = re.compile(r"^%(scheme)s:" % grouped_expressions, re.VERBOSE)
 net_scheme = re.compile(r"^%(scheme)s:(\/\/)?" % grouped_expressions, re.VERBOSE)
 "matches the scheme part and tests for a net_path"
 
+###
+
+class MalformedURLExpection(Exception):
+	pass # not sure if there is reason to split this up
 
 ### Functions to validate and parse URIRef strings
 
@@ -381,7 +385,7 @@ def urlparse(uriref, md=None):
 
 	return stdlib_urlparse.ParseResult(
 	        md['scheme'] or '',
-	        auth, path, params, 
+	        auth, path, params,
 	        md['query'] or '',
 	        md['fragment'] or ''
         )
@@ -478,6 +482,9 @@ class URIRef(str):
 
 		str.__init__(uri)
 		self.__match__ = match(uri)
+		if not self.__match__:
+			raise MalformedURLExpection("Unexpected format: %r" % uri)
+
 		self.__groups__ = self.__match__.groupdict()
 
 		self.opaque_targets = opaque_targets
