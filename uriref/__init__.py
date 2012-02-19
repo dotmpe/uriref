@@ -504,7 +504,10 @@ class URIRef(str):
 	# Special 'groups'
 	@property
 	def port(self, *value):
-		port = int(self.__groups__['port'])
+		if 'port' not in self.__groups__ or not self.__groups__['port']:
+			port = None
+		else:
+			port = int(self.__groups__['port'])
 		if not port:
 			if self.scheme in ('http', 'https'):
 				return 80
