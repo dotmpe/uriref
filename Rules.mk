@@ -48,7 +48,8 @@ test_$d:
 	@\
 	cd $(DIR);\
 	PYTHONPATH=$$PYTHONPATH:src/py:test/py;\
-	TEST_PY=test/py/main.py;TEST_LIB=uriref;\
+	TEST_PY=test/py/main.py;\
+	export TEST_LIB=uriref;\
     $(test-python);
 	@\
 	cd $(DIR);\
