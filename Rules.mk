@@ -53,8 +53,12 @@ test_$d:
     $(test-python);
 	@\
 	cd $(DIR);\
-    [ -e htmlcov ] && mv htmlcov doc && rm .coverage;\
-    [ -e uriref_testreport.html ] && mv uriref_testreport.html doc;
+    [ -e htmlcov ] && { \
+		[ -e doc/htmlcov ] && rm -rf doc/htmlcov;\
+    	mv htmlcov doc && rm .coverage;\
+	};\
+    [ -e uriref_testreport.html ] \
+    	&& mv uriref_testreport.html doc;
 	@$(call log_line,ok,$@)
 
 
