@@ -25,44 +25,44 @@ terms in RFC 2396. Only the terms relevant are shown.
 
 ::
 
-	( domainlabel "." ) toplabel [ "." ]
-	------------------------------------
-			  |
-		   hostname | IPv4address
-		   ----------------------		 *pchar *( ";" param )
-					 |					---------------------
-				   host [ ":" port ]			   |
-				   -----------------		*--------------*
-						 |				  |			  |
-   [ [ userinfo "@" ] hostport ]		 segment *( "/" segment )
-   -----------------------------		 ------------------------
-			   |							  |
-			 server | reg_name		"/"  path_segments
-			 -----------------		------------------
-					   |						|
-					   |			   *--------*----------------------*
-					   |			   |		|					  |
-				"//" authority [ abs_path ]	 |	rel_segment [  abs_path ]
-				---------------------------	 |	-------------------------
-							  |				 |			   |
-			*-----------------*				 |			   |
-			|		  *------|------------*----*			   |
-			|		  |	  |			|					*---*
-			|		  |	  |			|						|
-			|		  |   ( net_path | abs_path | opaque_part | rel_path ) [ "?" query ]
-			|		  |   --------------------------------------------------------------
-			|		  |						|
-	   ( net_path | abs_path ) [ "?" query]	 |
-	   ------------------------------------	 |
-						|					   |
-		scheme ":" ( hier_part | opaque_part )  |
-		--------------------------------------  |
-								 |			  |
-						   [ absoluteURI | relativeURI ] [ "#" fragment ]
-						   ----------------------------------------------
-											   |
-											   |
-										 URI-reference
+    ( domainlabel "." ) toplabel [ "." ]
+    ------------------------------------
+              |
+           hostname | IPv4address
+           ----------------------         *pchar *( ";" param )
+                     |                    ---------------------
+                   host [ ":" port ]               |
+                   -----------------        *--------------*
+                         |                  |              |
+   [ [ userinfo "@" ] hostport ]         segment *( "/" segment )
+   -----------------------------         ------------------------
+               |                              |
+             server | reg_name        "/"  path_segments
+             -----------------        ------------------
+                       |                        |
+                       |               *--------*----------------------*
+                       |               |        |                      |
+                "//" authority [ abs_path ]     |    rel_segment [  abs_path ]
+                ---------------------------     |    -------------------------
+                              |                 |               |
+            *-----------------*                 |               |
+            |          *------|------------*----*               |
+            |          |      |            |                    *---*
+            |          |      |            |                        |
+            |          |   ( net_path | abs_path | opaque_part | rel_path ) [ "?" query ]
+            |          |   --------------------------------------------------------------
+            |          |                        |
+       ( net_path | abs_path ) [ "?" query]     |
+       ------------------------------------     |
+                        |                       |
+        scheme ":" ( hier_part | opaque_part )  |
+        --------------------------------------  |
+                                 |              |
+                           [ absoluteURI | relativeURI ] [ "#" fragment ]
+                           ----------------------------------------------
+                                               |
+                                               |
+                                         URI-reference
 
 The only deviation between the RFC's BNF terms and the regular expressions groups
 is that the `net_path` *match group* is the `abs_path` of the `net_path` *BNF term*.
@@ -120,7 +120,7 @@ for URI matching. For example, to match `mysql://` style links one could
 create an regex object as follows::
 
   grouped_partial_expressions['mysq_db_ref'] = \
-	  r"^mysql: // %(authority)s / (?P<db> %(pchar)s*)$"
+      r"^mysql: // %(authority)s / (?P<db> %(pchar)s*)$"
   mysql_link_expr = merge_strings(grouped_partial_expressions)['mysq_db_ref']
   mysql_link_re = re.compile(mysql_link_expr, re.VERBOSE)
 
@@ -128,47 +128,47 @@ See above diagram or the RFC for the part names. Because the dictionary with
 match-group IDs is used (and one is added, 'db'), this results in a match
 object with the following nicely named groups::
 
-  __________<mysql://user:withpass@dbhost:3306/database>
-  userinfo :		 user:withpass
-  host	 :					   dbhost
-  port	 :							  3306
-  db	   :								   database
+  _________ <mysql://user:withpass@dbhost:3306/database>
+  userinfo :         user:withpass
+  host     :                       dbhost
+  port     :                              3306
+  db       :                                   database
 
 Examples of references
 ----------------------
 ::
 
-  _____________<http://user@sub.domain.org:80/path/to/leaf.php?query=arg&q=foo#fragment>
-  scheme	  : http
-  authority   :		user@sub.domain.org:80
-  userinfo	:		user
-  host		:			 sub.domain.org
-  port		:							80
-  net_path	:							  /path/to/leaf.php
-  query	   :												query=arg&q=foo
-  fragment	:																fragment
+  ____________ <http://user@sub.domain.org:80/path/to/leaf.php?query=arg&q=foo#fragment>
+  scheme      : http
+  authority   :        user@sub.domain.org:80
+  userinfo    :        user
+  host        :             sub.domain.org
+  port        :                            80
+  net_path    :                              /path/to/leaf.php
+  query       :                                                query=arg&q=foo
+  fragment    :                                                                fragment
 
 ::
 
-  _____________<ftp://usr:pwd@example.org:4321/pub/>
-  scheme	  : ftp
-  authority   :	   usr:pwd@example.org:4321
-  userinfo	:	   usr:pwd
-  host		:			   example.org
-  port		:						   4321
-  net_path	:							   /pub/
+  ____________ <ftp://usr:pwd@example.org:4321/pub/>
+  scheme      : ftp
+  authority   :       usr:pwd@example.org:4321
+  userinfo    :       usr:pwd
+  host        :               example.org
+  port        :                           4321
+  net_path    :                               /pub/
 
 ::
 
-  _____________<mid:some-message@example.org>
-  scheme	  : mid
-  opaque_part :	 some-message@example.org
+  ____________ <mid:some-message@example.org>
+  scheme      : mid
+  opaque_part :     some-message@example.org
 
 ::
 
-  _____________<service?query=foo>
-  rel_path	: service
-  query	   :		 query=foo
+  ____________ <service?query=foo>
+  rel_path    : service
+  query       :         query=foo
 
 
 See bin/parseuri for interactive parsing and tabular parts rendering.
@@ -183,9 +183,9 @@ Misc.
 References
 ----------
 .. [RFC_2396] `Uniform Resource Identifiers (URI): Generic Syntax`,
-			  T. Berners-Lee et al., 1998 <http://tools.ietf.org/html/rfc2396>
+              T. Berners-Lee et al., 1998 <http://tools.ietf.org/html/rfc2396>
 .. [RFC_3986] `Uniform Resource Identifiers (URI): Generic Syntax`,
-			  T. Berners-Lee et al., 2005 <http://tools.ietf.org/html/rfc3986>
+              T. Berners-Lee et al., 2005 <http://tools.ietf.org/html/rfc3986>
 
 """
 import re
