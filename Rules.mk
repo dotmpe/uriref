@@ -6,8 +6,7 @@ MK                  += $(MK_$d)
 
 SRC_$d              := $/uriref/__init__.py
 
-TRGT_$d             := \
-	$/profiling_urllib-comparison_.py
+TRGT_$d             := 
 
 DEP_$d              :=
 DMK_$d              :=
@@ -21,6 +20,8 @@ endef
 #
 TEST_$d             += profile_$d
 .PHONY:                profile_$d
+
+CLN += $/doc/stdlib-comparison.png $/doc/stdlib-comparison.svg
 
 profile_$d:: $/doc/stdlib-comparison.png $/doc/stdlib-comparison.svg
 
