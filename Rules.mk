@@ -6,8 +6,7 @@ MK                  += $(MK_$d)
 
 SRC_$d              := $/uriref/__init__.py
 
-TRGT_$d             := \
-	$/profiling_urllib-comparison_.py
+TRGT_$d             := 
 
 DEP_$d              :=
 DMK_$d              :=
@@ -21,6 +20,8 @@ endef
 #
 TEST_$d             += profile_$d
 .PHONY:                profile_$d
+
+CLN += $/doc/stdlib-comparison.png $/doc/stdlib-comparison.svg
 
 profile_$d:: $/doc/stdlib-comparison.png $/doc/stdlib-comparison.svg
 
@@ -48,12 +49,17 @@ test_$d:
 	@\
 	cd $(DIR);\
 	PYTHONPATH=$$PYTHONPATH:src/py:test/py;\
-	TEST_PY=test/py/main.py;TEST_LIB=uriref;\
+	TEST_PY=test/py/main.py;\
+	export TEST_LIB=uriref;\
     $(test-python);
 	@\
 	cd $(DIR);\
-    [ -e htmlcov ] && mv htmlcov doc && rm .coverage;\
-    [ -e uriref_testreport.html ] && mv uriref_testreport.html doc;
+    [ -e htmlcov ] && { \
+		[ -e doc/htmlcov ] && rm -rf doc/htmlcov;\
+    	mv htmlcov doc && rm .coverage;\
+	};\
+    [ -e uriref_testreport.html ] \
+    	&& mv uriref_testreport.html doc;
 	@$(call log_line,ok,$@)
 
 

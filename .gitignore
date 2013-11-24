@@ -6,8 +6,8 @@
 *.sw[po]
 *.pyc
 *.png
-/doc/rfc*.txt
-/doc/*.html
+#/doc/rfc*.txt
+#/doc/*.html
 /dist/
 MANIFEST
-htmlcov
+#htmlcov

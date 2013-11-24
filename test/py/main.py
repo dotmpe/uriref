@@ -22,7 +22,7 @@ from res import fictional_urls, out_in_the_wild_urls, invalid_urls
 def verify_testset(url, expected):
     """
     Verify expected data from resultset by comparison against urlparse.urlparse
-    results. This is an attempt to provide comparitibility with Python standard
+    results. This is an attempt to provide compatibility with Python standard
     library.
     """
     def _test(*args):
@@ -33,6 +33,7 @@ def verify_testset(url, expected):
                 % (url, expected_urlparse, parseresult)
     yield _test
 
+@profile
 def test_uriref_match(url, expected):
     """
     The actual test where the uriref.match result is compared with the expected
@@ -45,6 +46,7 @@ def test_uriref_match(url, expected):
                 % (url, groups, expected)
     yield _test
 
+@profile
 def test_uriref_urlparse(url, expected):
     """
     """
@@ -94,9 +96,15 @@ testcases = [
 ]
 class TestCase(unittest.TestCase):
     tests = [] 
+    #def setUp(self, test):
+    #    print self, 'setUp', test
     def runTest(self):
         for test in self.tests:
+            self.setUp(test)
             getattr(self, test)()
+            self.tearDown()
+    #def tearDown(self):
+    #    print self, 'tearDown'
 
 for test_name, testsets in testcases:
     for ts, testset_name in enumerate(testsets):
@@ -134,12 +142,13 @@ if __name__ == '__main__':
                 stream=fp,
                 title='URIRef test results',
                 description=''
-                )
+            )
     suite = unittest.TestSuite()
     for test_name, testset_names in testcases:
         for testset_name in testset_names:
             testset = globals()[testset_name]
             for test in wrap_test_functions(testset, test_name):
                 suite.addTest(test)
+    #print suite
     runner.run(suite)
 
