@@ -536,22 +536,22 @@ class URIRef(str):
 		if self.host:
 			sig.append('//')
 			if self.userinfo:
-				sig.extend((self.userinfo, '@'))
+				sig.extend((str(self.userinfo), '@'))
 			sig.append(self.host)
 			if self.port:
-				sig.extend((':', self.port))
+				sig.extend((':', str(self.port)))
 
 		if self.path:
-			sig.append(self.path)
+			sig.append(str(self.path))
 		elif self.opaque_part:
-			sig.append(self.opaque_part)
+			sig.append(str(self.opaque_part))
 		else:
 			sig.append('/')
 
 		if self.query:
-			sig.extend(('?', self.query))
+			sig.extend(('?', str(self.query)))
 		if self.fragment:
-			sig.extend(('#', self.fragment))
+			sig.extend(('#', str(self.fragment)))
 
 		return tuple(sig)
 
