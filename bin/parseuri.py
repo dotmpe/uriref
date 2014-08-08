@@ -8,6 +8,7 @@ import uriref
 
 
 def match_groupdict_table(subject, match, show_empty=False):
+
     """Create a table of the given regex match, using subject as header
     and group IDs as row labels.
     """
@@ -81,7 +82,7 @@ if __name__ == '__main__':
         print '-' * 79
         uris.insert(0, '//example.org/path?v=1')
         #uris.insert(0, '../path#id') XXX rel-part testing!
-        uris.insert(0, '//path.ext;param#id')
+        uris.insert(0, '//auth@host.tld/path.ext;param#id')
         uris.insert(0, './../path.ext;param#id')
         uris.insert(0, 'cid:some-content-id@example.org')
 

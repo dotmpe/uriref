@@ -471,6 +471,12 @@ class URIRef(str):
 	"""
 	Convenience class with regular expression parsing of URI's and
 	formatting back to string representation again.
+
+	This does only match the RFC terms. Iow. no (sub)domain, user/pwd, or query
+	parts available. 
+	
+	The uriref project comes with a command line tool 'parseuri' that pretty
+	prints a table of all parts given a uriref instance as argument.
 	"""
 
 	def __new__(type, *args, **kwds):
@@ -495,10 +501,12 @@ class URIRef(str):
 		part = None
 		if name in self.__groups__:
 			part = self.__groups__[name]
-		if not part and name in self.opaque_targets:
+		elif name in self.opaque_targets:
 			part = self.__groups__['opaque_part']
-		if not part and name == 'path':
+		elif name == 'path':
 			part = self.path
+		else:
+			raise AttributeError, name
 		return part
 
 	# Special 'groups'
@@ -522,10 +530,47 @@ class URIRef(str):
 		return self.__groups__['query']
 
 	@property
+	def query_args(self):
+		"""
+		Return tuple of query arguments. Key/value pair split and
+		unquoted.
+		"""
+		args = self.query.split('&')
+		for i in range(0, len(args)):
+			if '=' in args[i]:
+				k, v = map(urllib.unquote, args[i].split('='))
+				args[i] = (k, v)
+			else:
+				args[i] = urllib.unquote(args[i])
+		return args
+
+	@property
+	def query_kwds(self):
+		"""
+		Use urlparse.parse_qs to parse the query part to dictionay,
+		it returns values as lists (multiple occurences appended to unique key)
+		"""
+		return dict(**urlparse.parse_qs(self.query))
+
+	@property
+	def netpath(self):
+		"""
+		Return //<host><net_path> (no userinfo or port)
+		"""
+		if 'net_path' in self.__groups__:
+			return "//%s%s" % (
+					self.__groups__['host'],
+					self.__groups__['net_path']
+				)
+
+	@property
 	def path(self, *value):
-		for path in 'abs_path', 'rel_path', 'net_path':
-			if path in self.__groups__ and self.__groups__[path]:
-				return self.__groups__[path]
+		"""
+		Return either abs_path, rel_path or net_path group.
+		"""
+		for attr in 'abs_path', 'rel_path', 'net_path':
+			if attr in self.__groups__ and self.__groups__[attr]:
+				return self.__groups__[attr]
 
 	#
 	def generate_signature(self):
@@ -578,7 +623,9 @@ def bug1():
 	gd = m.groupdict()
 	#assert gd['host'] == 'net', gd
 	# and possibly related:
-	assert gd['net_path'] == '//net', gd
+	#assert gd['net_path'] == '//net', gd
+	assert URIRef('my://net/path').net_path == '/path'
+	assert URIRef('my://net/path').netpath == '//net/path'
 
 def print_complete_expressions():
 	print "**relativeURI**::\n\t", r"^%(relativeURI)s(\# (?P<fragment> %(fragment)s))?$" % expressions
