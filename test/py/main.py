@@ -19,7 +19,7 @@ Import testsets. Each uri is given with a dictionary of its parsed parts.
 """
 from res import fictional_urls, out_in_the_wild_urls, invalid_urls
 
-def verify_testset(url, expected):
+def verify_stdlib_compat(url, expected):
     """
     Verify expected data from resultset by comparison against urlparse.urlparse
     results. This is an attempt to provide compatibility with Python standard
@@ -29,11 +29,11 @@ def verify_testset(url, expected):
         expected_urlparse = uriref.urlparse(url, expected)._asdict()
         parseresult = urlparse.urlparse(url)._asdict()
         assert expected_urlparse == parseresult, \
-                "Testset[%s]: stdlib testset verification:\n\t%s\n\nShould match urlparse result:\n\t%s\n" \
+                "Testset[%s]: stdlib parser compatibility check:\n\t%s\n\nDifferent from urlparse:\n\t%s\n" \
                 % (url, expected_urlparse, parseresult)
     yield _test
 
-@profile
+#@profile
 def test_uriref_match(url, expected):
     """
     The actual test where the uriref.match result is compared with the expected
@@ -41,18 +41,26 @@ def test_uriref_match(url, expected):
     """
     def _test(*args):
         groups = uriref.match(url).groupdict()
+        for dct in ( groups, expected ):
+            for d in dct.keys():
+                if not dct[d]:
+                    del dct[d]
         assert groups == expected, \
                 "Testset[%s]: match failure:\n\t%s\n\nShould match result:\n\t%s\n" \
                 % (url, groups, expected)
     yield _test
 
-@profile
+#@profile
 def test_uriref_urlparse(url, expected):
     """
     """
     def _test(*args):
         groups = uriref.urlparse(url)._asdict()
         expected_urlparse = uriref.urlparse(url, expected)._asdict()
+        for dct in ( groups, expected_urlparse ):
+            for d in dct.keys():
+                if not dct[d]:
+                    del dct[d]
         assert groups == expected_urlparse, \
                 "Testset[%s]: urlparse comparison failure:\n\t%s\n\nShould match expected urlparse result:\n\t%s\n" \
                 % (url, groups, expected_urlparse)
@@ -89,7 +97,7 @@ def test_stdlib_compare(url, expected):
     yield _test
 
 testcases = [
-        ('verify_testset', "fictional_urls out_in_the_wild_urls".split()),
+        ('verify_stdlib_compat', "fictional_urls out_in_the_wild_urls".split()),
         ('test_uriref_match', "fictional_urls out_in_the_wild_urls".split()),
         ('test_uriref_urlparse', "fictional_urls out_in_the_wild_urls".split()),
         ('test_stdlib_compare', "fictional_urls out_in_the_wild_urls".split()),

@@ -364,8 +364,9 @@ def urlparse(uriref, md=None):
 	if not md:
 		md = match(uriref).groupdict()
 
-	if 'scheme' not in md:
-		md['scheme'] = None
+	for p in [ 'scheme', 'netloc', 'path', 'params', 'query', 'fragment' ]:
+		if p not in md:
+			md[p] = None
 
 	auth = ''
 	if 'hostname' in md:

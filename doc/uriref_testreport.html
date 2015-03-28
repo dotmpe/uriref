@@ -189,9 +189,9 @@ function showOutput(id, name) {
 
 <div class='heading'>
 <h1>URIRef test results</h1>
-<p class='attribute'><strong>Start Time:</strong> 2012-01-28 15:16:25</p>
-<p class='attribute'><strong>Duration:</strong> 0:00:00.012882</p>
-<p class='attribute'><strong>Status:</strong> Pass 59 Failure 33</p>
+<p class='attribute'><strong>Start Time:</strong> 2015-03-28 04:04:59</p>
+<p class='attribute'><strong>Duration:</strong> 0:00:00.015155</p>
+<p class='attribute'><strong>Status:</strong> Pass 56 Failure 36</p>
 
 <p class='description'></p>
 </div>
@@ -222,21 +222,21 @@ function showOutput(id, name) {
 </tr>
 
 <tr class='failClass'>
-    <td>unittest.FunctionTestCase: A test case that wraps a test function.</td>
+    <td>unittest.case.FunctionTestCase: A test case that wraps a test function.</td>
     <td>92</td>
-    <td>59</td>
-    <td>33</td>
+    <td>56</td>
+    <td>36</td>
     <td>0</td>
     <td><a href="javascript:showClassDetail('c1',92)">Detail</a></td>
 </tr>
 
 <tr id='pt1.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: verify_testset[file:/simple/path/to/file.ext]</div></td>
+    <td class='none'><div class='testcase'>_test: verify_stdlib_compat[file:/simple/path/to/file.ext]</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
 <tr id='ft1.2' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[file://host/some/path;param/to/file.etc]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[file://host/some/path;param/to/file.etc]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -253,11 +253,11 @@ function showOutput(id, name) {
 ft1.2: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[file://host/some/path;param/to/file.etc]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': None, 'scheme': 'file'}
+AssertionError: Testset[file://host/some/path;param/to/file.etc]: stdlib parser compatibility check:
+	OrderedDict([('scheme', 'file'), ('netloc', ''), ('path', None), ('params', ''), ('query', ''), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': 'host', 'params': '', 'query': '', 'path': '/some/path;param/to/file.etc', 'scheme': 'file'}
+Different from urlparse:
+	OrderedDict([('scheme', 'file'), ('netloc', 'host'), ('path', '/some/path;param/to/file.etc'), ('params', ''), ('query', ''), ('fragment', '')])
 
 
 
@@ -269,7 +269,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.3' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[http://example.org/path]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[http://example.org/path]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -286,11 +286,11 @@ Should match urlparse result:
 ft1.3: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[http://example.org/path]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': None, 'scheme': 'http'}
+AssertionError: Testset[http://example.org/path]: stdlib parser compatibility check:
+	OrderedDict([('scheme', 'http'), ('netloc', ''), ('path', None), ('params', ''), ('query', ''), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': 'example.org', 'params': '', 'query': '', 'path': '/path', 'scheme': 'http'}
+Different from urlparse:
+	OrderedDict([('scheme', 'http'), ('netloc', 'example.org'), ('path', '/path'), ('params', ''), ('query', ''), ('fragment', '')])
 
 
 
@@ -302,7 +302,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.4' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[http://example.org/service?query=foo#id]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[http://example.org/service?query=foo#id]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -319,11 +319,11 @@ Should match urlparse result:
 ft1.4: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[http://example.org/service?query=foo#id]: stdlib testset verification:
-	{'fragment': 'id', 'netloc': '', 'params': '', 'query': 'query=foo', 'path': None, 'scheme': 'http'}
+AssertionError: Testset[http://example.org/service?query=foo#id]: stdlib parser compatibility check:
+	OrderedDict([('scheme', 'http'), ('netloc', ''), ('path', None), ('params', ''), ('query', 'query=foo'), ('fragment', 'id')])
 
-Should match urlparse result:
-	{'fragment': 'id', 'netloc': 'example.org', 'params': '', 'query': 'query=foo', 'path': '/service', 'scheme': 'http'}
+Different from urlparse:
+	OrderedDict([('scheme', 'http'), ('netloc', 'example.org'), ('path', '/service'), ('params', ''), ('query', 'query=foo'), ('fragment', 'id')])
 
 
 
@@ -335,7 +335,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.5' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[http://example.org/service?query=foo&opt=val]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[http://example.org/service?query=foo&opt=val]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -352,11 +352,11 @@ Should match urlparse result:
 ft1.5: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[http://example.org/service?query=foo&amp;opt=val]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': 'query=foo&amp;opt=val', 'path': None, 'scheme': 'http'}
+AssertionError: Testset[http://example.org/service?query=foo&amp;opt=val]: stdlib parser compatibility check:
+	OrderedDict([('scheme', 'http'), ('netloc', ''), ('path', None), ('params', ''), ('query', 'query=foo&amp;opt=val'), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': 'example.org', 'params': '', 'query': 'query=foo&amp;opt=val', 'path': '/service', 'scheme': 'http'}
+Different from urlparse:
+	OrderedDict([('scheme', 'http'), ('netloc', 'example.org'), ('path', '/service'), ('params', ''), ('query', 'query=foo&amp;opt=val'), ('fragment', '')])
 
 
 
@@ -368,7 +368,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.6' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[//example.org/service?query=foo&opt=val]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[//example.org/service?query=foo&opt=val]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -385,11 +385,11 @@ Should match urlparse result:
 ft1.6: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[//example.org/service?query=foo&amp;opt=val]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': 'query=foo&amp;opt=val', 'path': None, 'scheme': ''}
+AssertionError: Testset[//example.org/service?query=foo&amp;opt=val]: stdlib parser compatibility check:
+	OrderedDict([('scheme', ''), ('netloc', ''), ('path', None), ('params', ''), ('query', 'query=foo&amp;opt=val'), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': 'example.org', 'params': '', 'query': 'query=foo&amp;opt=val', 'path': '/service', 'scheme': ''}
+Different from urlparse:
+	OrderedDict([('scheme', ''), ('netloc', 'example.org'), ('path', '/service'), ('params', ''), ('query', 'query=foo&amp;opt=val'), ('fragment', '')])
 
 
 
@@ -401,12 +401,12 @@ Should match urlparse result:
 </tr>
 
 <tr id='pt1.7' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: verify_testset[/service?query=foo]</div></td>
+    <td class='none'><div class='testcase'>_test: verify_stdlib_compat[/service?query=foo]</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
 <tr id='ft1.8' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[./service?query=foo]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[./service?query=foo]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -423,11 +423,11 @@ Should match urlparse result:
 ft1.8: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[./service?query=foo]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': 'query=foo', 'path': None, 'scheme': ''}
+AssertionError: Testset[./service?query=foo]: stdlib parser compatibility check:
+	OrderedDict([('scheme', ''), ('netloc', ''), ('path', None), ('params', ''), ('query', 'query=foo'), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': 'query=foo', 'path': './service', 'scheme': ''}
+Different from urlparse:
+	OrderedDict([('scheme', ''), ('netloc', ''), ('path', './service'), ('params', ''), ('query', 'query=foo'), ('fragment', '')])
 
 
 
@@ -439,7 +439,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.9' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[service?query=foo]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[service?query=foo]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -456,11 +456,11 @@ Should match urlparse result:
 ft1.9: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[service?query=foo]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': None, 'scheme': ''}
+AssertionError: Testset[service?query=foo]: stdlib parser compatibility check:
+	OrderedDict([('scheme', ''), ('netloc', ''), ('path', None), ('params', ''), ('query', ''), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': 'query=foo', 'path': 'service', 'scheme': ''}
+Different from urlparse:
+	OrderedDict([('scheme', ''), ('netloc', ''), ('path', 'service'), ('params', ''), ('query', 'query=foo'), ('fragment', '')])
 
 
 
@@ -472,7 +472,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.10' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[http://example.org/with/very/long-path/to/file.etc]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[http://example.org/with/very/long-path/to/file.etc]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -489,11 +489,11 @@ Should match urlparse result:
 ft1.10: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[http://example.org/with/very/long-path/to/file.etc]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': None, 'scheme': 'http'}
+AssertionError: Testset[http://example.org/with/very/long-path/to/file.etc]: stdlib parser compatibility check:
+	OrderedDict([('scheme', 'http'), ('netloc', ''), ('path', None), ('params', ''), ('query', ''), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': 'example.org', 'params': '', 'query': '', 'path': '/with/very/long-path/to/file.etc', 'scheme': 'http'}
+Different from urlparse:
+	OrderedDict([('scheme', 'http'), ('netloc', 'example.org'), ('path', '/with/very/long-path/to/file.etc'), ('params', ''), ('query', ''), ('fragment', '')])
 
 
 
@@ -505,7 +505,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.11' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[http://dotmpe.com/schema;v5/cllct;1#SomeType]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[http://dotmpe.com/schema;v5/cllct;1#SomeType]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -522,11 +522,11 @@ Should match urlparse result:
 ft1.11: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[http://dotmpe.com/schema;v5/cllct;1#SomeType]: stdlib testset verification:
-	{'fragment': 'SomeType', 'netloc': '', 'params': '', 'query': '', 'path': None, 'scheme': 'http'}
+AssertionError: Testset[http://dotmpe.com/schema;v5/cllct;1#SomeType]: stdlib parser compatibility check:
+	OrderedDict([('scheme', 'http'), ('netloc', ''), ('path', None), ('params', ''), ('query', ''), ('fragment', 'SomeType')])
 
-Should match urlparse result:
-	{'fragment': 'SomeType', 'netloc': 'dotmpe.com', 'params': '1', 'query': '', 'path': '/schema;v5/cllct', 'scheme': 'http'}
+Different from urlparse:
+	OrderedDict([('scheme', 'http'), ('netloc', 'dotmpe.com'), ('path', '/schema;v5/cllct'), ('params', '1'), ('query', ''), ('fragment', 'SomeType')])
 
 
 
@@ -538,7 +538,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.12' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[../relative/path/to/file]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[../relative/path/to/file]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -555,11 +555,11 @@ Should match urlparse result:
 ft1.12: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[../relative/path/to/file]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': None, 'scheme': ''}
+AssertionError: Testset[../relative/path/to/file]: stdlib parser compatibility check:
+	OrderedDict([('scheme', ''), ('netloc', ''), ('path', None), ('params', ''), ('query', ''), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': '../relative/path/to/file', 'scheme': ''}
+Different from urlparse:
+	OrderedDict([('scheme', ''), ('netloc', ''), ('path', '../relative/path/to/file'), ('params', ''), ('query', ''), ('fragment', '')])
 
 
 
@@ -571,7 +571,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.13' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[./rel/1]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[./rel/1]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -588,11 +588,11 @@ Should match urlparse result:
 ft1.13: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[./rel/1]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': None, 'scheme': ''}
+AssertionError: Testset[./rel/1]: stdlib parser compatibility check:
+	OrderedDict([('scheme', ''), ('netloc', ''), ('path', None), ('params', ''), ('query', ''), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': './rel/1', 'scheme': ''}
+Different from urlparse:
+	OrderedDict([('scheme', ''), ('netloc', ''), ('path', './rel/1'), ('params', ''), ('query', ''), ('fragment', '')])
 
 
 
@@ -604,7 +604,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.14' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[//example.org/path/to/file#id]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[//example.org/path/to/file#id]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -621,11 +621,11 @@ Should match urlparse result:
 ft1.14: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[//example.org/path/to/file#id]: stdlib testset verification:
-	{'fragment': 'id', 'netloc': '', 'params': '', 'query': '', 'path': None, 'scheme': ''}
+AssertionError: Testset[//example.org/path/to/file#id]: stdlib parser compatibility check:
+	OrderedDict([('scheme', ''), ('netloc', ''), ('path', None), ('params', ''), ('query', ''), ('fragment', 'id')])
 
-Should match urlparse result:
-	{'fragment': 'id', 'netloc': 'example.org', 'params': '', 'query': '', 'path': '/path/to/file', 'scheme': ''}
+Different from urlparse:
+	OrderedDict([('scheme', ''), ('netloc', 'example.org'), ('path', '/path/to/file'), ('params', ''), ('query', ''), ('fragment', 'id')])
 
 
 
@@ -637,7 +637,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.15' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[//example.org/~admin]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[//example.org/~admin]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -654,11 +654,11 @@ Should match urlparse result:
 ft1.15: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[//example.org/~admin]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': None, 'scheme': ''}
+AssertionError: Testset[//example.org/~admin]: stdlib parser compatibility check:
+	OrderedDict([('scheme', ''), ('netloc', ''), ('path', None), ('params', ''), ('query', ''), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': 'example.org', 'params': '', 'query': '', 'path': '/~admin', 'scheme': ''}
+Different from urlparse:
+	OrderedDict([('scheme', ''), ('netloc', 'example.org'), ('path', '/~admin'), ('params', ''), ('query', ''), ('fragment', '')])
 
 
 
@@ -670,7 +670,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.16' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[ftp://usr:pwd@example.org:4321/pub/]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[ftp://usr:pwd@example.org:4321/pub/]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -687,11 +687,11 @@ Should match urlparse result:
 ft1.16: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[ftp://usr:pwd@example.org:4321/pub/]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': None, 'scheme': 'ftp'}
+AssertionError: Testset[ftp://usr:pwd@example.org:4321/pub/]: stdlib parser compatibility check:
+	OrderedDict([('scheme', 'ftp'), ('netloc', ''), ('path', None), ('params', ''), ('query', ''), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': 'usr:pwd@example.org:4321', 'params': '', 'query': '', 'path': '/pub/', 'scheme': 'ftp'}
+Different from urlparse:
+	OrderedDict([('scheme', 'ftp'), ('netloc', 'usr:pwd@example.org:4321'), ('path', '/pub/'), ('params', ''), ('query', ''), ('fragment', '')])
 
 
 
@@ -703,7 +703,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.17' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[mailto:mailbox@example.org]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[mailto:mailbox@example.org]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -720,11 +720,11 @@ Should match urlparse result:
 ft1.17: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[mailto:mailbox@example.org]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': None, 'scheme': 'mailto'}
+AssertionError: Testset[mailto:mailbox@example.org]: stdlib parser compatibility check:
+	OrderedDict([('scheme', 'mailto'), ('netloc', ''), ('path', None), ('params', ''), ('query', ''), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': 'mailbox@example.org', 'scheme': 'mailto'}
+Different from urlparse:
+	OrderedDict([('scheme', 'mailto'), ('netloc', ''), ('path', 'mailbox@example.org'), ('params', ''), ('query', ''), ('fragment', '')])
 
 
 
@@ -736,7 +736,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.18' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[mailbox@example.org]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[mailbox@example.org]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -753,11 +753,11 @@ Should match urlparse result:
 ft1.18: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[mailbox@example.org]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': None, 'scheme': ''}
+AssertionError: Testset[mailbox@example.org]: stdlib parser compatibility check:
+	OrderedDict([('scheme', ''), ('netloc', ''), ('path', None), ('params', ''), ('query', ''), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': 'mailbox@example.org', 'scheme': ''}
+Different from urlparse:
+	OrderedDict([('scheme', ''), ('netloc', ''), ('path', 'mailbox@example.org'), ('params', ''), ('query', ''), ('fragment', '')])
 
 
 
@@ -769,7 +769,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.19' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[mid:some-message@example.org]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[mid:some-message@example.org]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -786,11 +786,11 @@ Should match urlparse result:
 ft1.19: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[mid:some-message@example.org]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': None, 'scheme': 'mid'}
+AssertionError: Testset[mid:some-message@example.org]: stdlib parser compatibility check:
+	OrderedDict([('scheme', 'mid'), ('netloc', ''), ('path', None), ('params', ''), ('query', ''), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': 'some-message@example.org', 'scheme': 'mid'}
+Different from urlparse:
+	OrderedDict([('scheme', 'mid'), ('netloc', ''), ('path', 'some-message@example.org'), ('params', ''), ('query', ''), ('fragment', '')])
 
 
 
@@ -802,7 +802,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.20' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[we+ird.3-scheme://user.info:etc-5;foo@host/path;params/dir/file?q]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[we+ird.3-scheme://user.info:etc-5;foo@host/path;params/dir/file?q]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -819,11 +819,11 @@ Should match urlparse result:
 ft1.20: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[we+ird.3-scheme://user.info:etc-5;foo@host/path;params/dir/file?q]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': 'q', 'path': None, 'scheme': 'we+ird.3-scheme'}
+AssertionError: Testset[we+ird.3-scheme://user.info:etc-5;foo@host/path;params/dir/file?q]: stdlib parser compatibility check:
+	OrderedDict([('scheme', 'we+ird.3-scheme'), ('netloc', ''), ('path', None), ('params', ''), ('query', 'q'), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': 'user.info:etc-5;foo@host', 'params': '', 'query': '', 'path': '/path;params/dir/file?q', 'scheme': 'we+ird.3-scheme'}
+Different from urlparse:
+	OrderedDict([('scheme', 'we+ird.3-scheme'), ('netloc', 'user.info:etc-5;foo@host'), ('path', '/path;params/dir/file'), ('params', ''), ('query', 'q'), ('fragment', '')])
 
 
 
@@ -835,7 +835,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.21' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[file://localhost/translit/alexander-pope.criticism.edl]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[file://localhost/translit/alexander-pope.criticism.edl]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -852,11 +852,11 @@ Should match urlparse result:
 ft1.21: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[file://localhost/translit/alexander-pope.criticism.edl]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': None, 'scheme': 'file'}
+AssertionError: Testset[file://localhost/translit/alexander-pope.criticism.edl]: stdlib parser compatibility check:
+	OrderedDict([('scheme', 'file'), ('netloc', ''), ('path', None), ('params', ''), ('query', ''), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': 'localhost', 'params': '', 'query': '', 'path': '/translit/alexander-pope.criticism.edl', 'scheme': 'file'}
+Different from urlparse:
+	OrderedDict([('scheme', 'file'), ('netloc', 'localhost'), ('path', '/translit/alexander-pope.criticism.edl'), ('params', ''), ('query', ''), ('fragment', '')])
 
 
 
@@ -868,7 +868,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.22' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[irc://host/channel]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[irc://host/channel]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -885,11 +885,11 @@ Should match urlparse result:
 ft1.22: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[irc://host/channel]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': None, 'scheme': 'irc'}
+AssertionError: Testset[irc://host/channel]: stdlib parser compatibility check:
+	OrderedDict([('scheme', 'irc'), ('netloc', ''), ('path', None), ('params', ''), ('query', ''), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': 'host', 'params': '', 'query': '', 'path': '/channel', 'scheme': 'irc'}
+Different from urlparse:
+	OrderedDict([('scheme', 'irc'), ('netloc', 'host'), ('path', '/channel'), ('params', ''), ('query', ''), ('fragment', '')])
 
 
 
@@ -901,7 +901,7 @@ Should match urlparse result:
 </tr>
 
 <tr id='ft1.23' class='none'>
-    <td class='failCase'><div class='testcase'>_test: verify_testset[//host.name/channel]</div></td>
+    <td class='failCase'><div class='testcase'>_test: verify_stdlib_compat[//host.name/channel]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
@@ -918,11 +918,11 @@ Should match urlparse result:
 ft1.23: Traceback (most recent call last):
   File "test/py/main.py", line 33, in _test
     % (url, expected_urlparse, parseresult)
-AssertionError: Testset[//host.name/channel]: stdlib testset verification:
-	{'fragment': '', 'netloc': '', 'params': '', 'query': '', 'path': None, 'scheme': ''}
+AssertionError: Testset[//host.name/channel]: stdlib parser compatibility check:
+	OrderedDict([('scheme', ''), ('netloc', ''), ('path', None), ('params', ''), ('query', ''), ('fragment', '')])
 
-Should match urlparse result:
-	{'fragment': '', 'netloc': 'host.name', 'params': '', 'query': '', 'path': '/channel', 'scheme': ''}
+Different from urlparse:
+	OrderedDict([('scheme', ''), ('netloc', 'host.name'), ('path', '/channel'), ('params', ''), ('query', ''), ('fragment', '')])
 
 
 
@@ -958,136 +958,24 @@ Should match urlparse result:
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='ft1.29' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_match[//example.org/service?query=foo&opt=val]</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.29')" >
-        fail</a>
-
-    <div id='div_ft1.29' class="popup_window">
-        <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.29').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.29: Traceback (most recent call last):
-  File "test/py/main.py", line 45, in _test
-    % (url, groups, expected)
-AssertionError: Testset[//example.org/service?query=foo&amp;opt=val]: match failure:
-	{'opaque_part': None, 'abs_path': None, 'fragment': None, 'authority': 'example.org', 'net_path': '/service', 'host': 'example.org', 'userinfo': None, 'query': 'query=foo&amp;opt=val', 'port': None, 'rel_path': None}
-
-Should match result:
-	{'fragment': None, 'authority': 'example.org', 'host': 'example.org', 'rel_path': None, 'query': 'query=foo&amp;opt=val', 'port': None, 'opaque_part': None, 'abs_path': None, 'net_path': '/service', 'userinfo': None, 'scheme': None}
-
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
+<tr id='pt1.29' class='hiddenRow'>
+    <td class='none'><div class='testcase'>_test: test_uriref_match[//example.org/service?query=foo&opt=val]</div></td>
+    <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='ft1.30' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_match[/service?query=foo]</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.30')" >
-        fail</a>
-
-    <div id='div_ft1.30' class="popup_window">
-        <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.30').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.30: Traceback (most recent call last):
-  File "test/py/main.py", line 45, in _test
-    % (url, groups, expected)
-AssertionError: Testset[/service?query=foo]: match failure:
-	{'opaque_part': None, 'abs_path': '/service', 'fragment': None, 'authority': None, 'net_path': None, 'host': None, 'userinfo': None, 'query': 'query=foo', 'port': None, 'rel_path': None}
-
-Should match result:
-	{'fragment': None, 'authority': None, 'host': None, 'rel_path': None, 'query': 'query=foo', 'port': None, 'opaque_part': None, 'abs_path': '/service', 'net_path': None, 'userinfo': None, 'scheme': None}
-
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
+<tr id='pt1.30' class='hiddenRow'>
+    <td class='none'><div class='testcase'>_test: test_uriref_match[/service?query=foo]</div></td>
+    <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='ft1.31' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_match[./service?query=foo]</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.31')" >
-        fail</a>
-
-    <div id='div_ft1.31' class="popup_window">
-        <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.31').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.31: Traceback (most recent call last):
-  File "test/py/main.py", line 45, in _test
-    % (url, groups, expected)
-AssertionError: Testset[./service?query=foo]: match failure:
-	{'opaque_part': None, 'abs_path': None, 'fragment': None, 'authority': None, 'net_path': None, 'host': None, 'userinfo': None, 'query': 'query=foo', 'port': None, 'rel_path': './service'}
-
-Should match result:
-	{'fragment': None, 'authority': None, 'host': None, 'rel_path': './service', 'query': 'query=foo', 'port': None, 'opaque_part': None, 'abs_path': None, 'net_path': None, 'userinfo': None, 'scheme': None}
-
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
+<tr id='pt1.31' class='hiddenRow'>
+    <td class='none'><div class='testcase'>_test: test_uriref_match[./service?query=foo]</div></td>
+    <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='ft1.32' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_match[service?query=foo]</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.32')" >
-        fail</a>
-
-    <div id='div_ft1.32' class="popup_window">
-        <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.32').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.32: Traceback (most recent call last):
-  File "test/py/main.py", line 45, in _test
-    % (url, groups, expected)
-AssertionError: Testset[service?query=foo]: match failure:
-	{'opaque_part': 'service?query=foo', 'abs_path': None, 'fragment': None, 'authority': None, 'net_path': None, 'host': None, 'userinfo': None, 'query': None, 'port': None, 'rel_path': None}
-
-Should match result:
-	{'fragment': None, 'authority': None, 'host': None, 'rel_path': None, 'query': None, 'port': None, 'opaque_part': 'service?query=foo', 'abs_path': None, 'net_path': None, 'userinfo': None, 'scheme': None}
-
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
+<tr id='pt1.32' class='hiddenRow'>
+    <td class='none'><div class='testcase'>_test: test_uriref_match[service?query=foo]</div></td>
+    <td colspan='5' align='center'>pass</td>
 </tr>
 
 <tr id='pt1.33' class='hiddenRow'>
@@ -1100,136 +988,24 @@ Should match result:
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='ft1.35' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_match[../relative/path/to/file]</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.35')" >
-        fail</a>
-
-    <div id='div_ft1.35' class="popup_window">
-        <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.35').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.35: Traceback (most recent call last):
-  File "test/py/main.py", line 45, in _test
-    % (url, groups, expected)
-AssertionError: Testset[../relative/path/to/file]: match failure:
-	{'opaque_part': '../relative/path/to/file', 'abs_path': None, 'fragment': None, 'authority': None, 'net_path': None, 'host': None, 'userinfo': None, 'query': None, 'port': None, 'rel_path': None}
-
-Should match result:
-	{'fragment': None, 'authority': None, 'host': None, 'rel_path': None, 'query': None, 'port': None, 'opaque_part': '../relative/path/to/file', 'abs_path': None, 'net_path': None, 'userinfo': None, 'scheme': None}
-
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
+<tr id='pt1.35' class='hiddenRow'>
+    <td class='none'><div class='testcase'>_test: test_uriref_match[../relative/path/to/file]</div></td>
+    <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='ft1.36' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_match[./rel/1]</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.36')" >
-        fail</a>
-
-    <div id='div_ft1.36' class="popup_window">
-        <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.36').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.36: Traceback (most recent call last):
-  File "test/py/main.py", line 45, in _test
-    % (url, groups, expected)
-AssertionError: Testset[./rel/1]: match failure:
-	{'opaque_part': None, 'abs_path': None, 'fragment': None, 'authority': None, 'net_path': None, 'host': None, 'userinfo': None, 'query': None, 'port': None, 'rel_path': './rel/1'}
-
-Should match result:
-	{'fragment': None, 'authority': None, 'host': None, 'rel_path': './rel/1', 'query': None, 'port': None, 'opaque_part': None, 'abs_path': None, 'net_path': None, 'userinfo': None, 'scheme': None}
-
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
+<tr id='pt1.36' class='hiddenRow'>
+    <td class='none'><div class='testcase'>_test: test_uriref_match[./rel/1]</div></td>
+    <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='ft1.37' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_match[//example.org/path/to/file#id]</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.37')" >
-        fail</a>
-
-    <div id='div_ft1.37' class="popup_window">
-        <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.37').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.37: Traceback (most recent call last):
-  File "test/py/main.py", line 45, in _test
-    % (url, groups, expected)
-AssertionError: Testset[//example.org/path/to/file#id]: match failure:
-	{'opaque_part': None, 'abs_path': None, 'fragment': 'id', 'authority': 'example.org', 'net_path': '/path/to/file', 'host': 'example.org', 'userinfo': None, 'query': None, 'port': None, 'rel_path': None}
-
-Should match result:
-	{'fragment': 'id', 'authority': 'example.org', 'host': 'example.org', 'rel_path': None, 'query': None, 'port': None, 'opaque_part': None, 'abs_path': None, 'net_path': '/path/to/file', 'userinfo': None, 'scheme': None}
-
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
+<tr id='pt1.37' class='hiddenRow'>
+    <td class='none'><div class='testcase'>_test: test_uriref_match[//example.org/path/to/file#id]</div></td>
+    <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='ft1.38' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_match[//example.org/~admin]</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.38')" >
-        fail</a>
-
-    <div id='div_ft1.38' class="popup_window">
-        <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.38').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.38: Traceback (most recent call last):
-  File "test/py/main.py", line 45, in _test
-    % (url, groups, expected)
-AssertionError: Testset[//example.org/~admin]: match failure:
-	{'opaque_part': None, 'abs_path': None, 'fragment': None, 'authority': 'example.org', 'net_path': '/~admin', 'host': 'example.org', 'userinfo': None, 'query': None, 'port': None, 'rel_path': None}
-
-Should match result:
-	{'fragment': None, 'authority': 'example.org', 'host': 'example.org', 'rel_path': None, 'query': None, 'port': None, 'opaque_part': None, 'abs_path': None, 'net_path': '/~admin', 'userinfo': None, 'scheme': None}
-
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
+<tr id='pt1.38' class='hiddenRow'>
+    <td class='none'><div class='testcase'>_test: test_uriref_match[//example.org/~admin]</div></td>
+    <td colspan='5' align='center'>pass</td>
 </tr>
 
 <tr id='pt1.39' class='hiddenRow'>
@@ -1242,37 +1018,9 @@ Should match result:
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='ft1.41' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_match[mailbox@example.org]</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.41')" >
-        fail</a>
-
-    <div id='div_ft1.41' class="popup_window">
-        <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.41').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.41: Traceback (most recent call last):
-  File "test/py/main.py", line 45, in _test
-    % (url, groups, expected)
-AssertionError: Testset[mailbox@example.org]: match failure:
-	{'opaque_part': 'mailbox@example.org', 'abs_path': None, 'fragment': None, 'authority': None, 'net_path': None, 'host': None, 'userinfo': None, 'query': None, 'port': None, 'rel_path': None}
-
-Should match result:
-	{'fragment': None, 'authority': None, 'host': None, 'rel_path': None, 'query': None, 'port': None, 'opaque_part': 'mailbox@example.org', 'abs_path': None, 'net_path': None, 'userinfo': None, 'scheme': None}
-
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
+<tr id='pt1.41' class='hiddenRow'>
+    <td class='none'><div class='testcase'>_test: test_uriref_match[mailbox@example.org]</div></td>
+    <td colspan='5' align='center'>pass</td>
 </tr>
 
 <tr id='pt1.42' class='hiddenRow'>
@@ -1295,29 +1043,39 @@ Should match result:
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='ft1.46' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_match[//host.name/channel]</div></td>
+<tr id='pt1.46' class='hiddenRow'>
+    <td class='none'><div class='testcase'>_test: test_uriref_match[//host.name/channel]</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt1.47' class='hiddenRow'>
+    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[file:/simple/path/to/file.ext]</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='ft1.48' class='none'>
+    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[file://host/some/path;param/to/file.etc]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.46')" >
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.48')" >
         fail</a>
 
-    <div id='div_ft1.46' class="popup_window">
+    <div id='div_ft1.48' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.46').style.display = 'none' " >
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.48').style.display = 'none' " >
            [x]</a>
         </div>
         <pre>
         
-ft1.46: Traceback (most recent call last):
-  File "test/py/main.py", line 45, in _test
-    % (url, groups, expected)
-AssertionError: Testset[//host.name/channel]: match failure:
-	{'opaque_part': None, 'abs_path': None, 'fragment': None, 'authority': 'host.name', 'net_path': '/channel', 'host': 'host.name', 'userinfo': None, 'query': None, 'port': None, 'rel_path': None}
+ft1.48: Traceback (most recent call last):
+  File "test/py/main.py", line 66, in _test
+    % (url, groups, expected_urlparse)
+AssertionError: Testset[file://host/some/path;param/to/file.etc]: urlparse comparison failure:
+	OrderedDict([('scheme', 'file')])
 
-Should match result:
-	{'fragment': None, 'authority': 'host.name', 'host': 'host.name', 'rel_path': None, 'query': None, 'port': None, 'opaque_part': None, 'abs_path': None, 'net_path': '/channel', 'userinfo': None, 'scheme': None}
+Should match expected urlparse result:
+	OrderedDict([('scheme', 'file'), ('path', '/some/path;param/to/file.etc')])
 
 
 
@@ -1328,34 +1086,136 @@ Should match result:
     </td>
 </tr>
 
-<tr id='pt1.47' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[file:/simple/path/to/file.ext]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.49' class='none'>
+    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[http://example.org/path]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.49')" >
+        fail</a>
+
+    <div id='div_ft1.49' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.49').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.49: Traceback (most recent call last):
+  File "test/py/main.py", line 66, in _test
+    % (url, groups, expected_urlparse)
+AssertionError: Testset[http://example.org/path]: urlparse comparison failure:
+	OrderedDict([('scheme', 'http')])
+
+Should match expected urlparse result:
+	OrderedDict([('scheme', 'http'), ('path', '/path')])
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
-<tr id='pt1.48' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[file://host/some/path;param/to/file.etc]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.50' class='none'>
+    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[http://example.org/service?query=foo#id]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.50')" >
+        fail</a>
+
+    <div id='div_ft1.50' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.50').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.50: Traceback (most recent call last):
+  File "test/py/main.py", line 66, in _test
+    % (url, groups, expected_urlparse)
+AssertionError: Testset[http://example.org/service?query=foo#id]: urlparse comparison failure:
+	OrderedDict([('scheme', 'http'), ('query', 'query=foo'), ('fragment', 'id')])
+
+Should match expected urlparse result:
+	OrderedDict([('scheme', 'http'), ('path', '/service'), ('query', 'query=foo'), ('fragment', 'id')])
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
-<tr id='pt1.49' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[http://example.org/path]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.51' class='none'>
+    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[http://example.org/service?query=foo&opt=val]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.51')" >
+        fail</a>
+
+    <div id='div_ft1.51' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.51').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.51: Traceback (most recent call last):
+  File "test/py/main.py", line 66, in _test
+    % (url, groups, expected_urlparse)
+AssertionError: Testset[http://example.org/service?query=foo&amp;opt=val]: urlparse comparison failure:
+	OrderedDict([('scheme', 'http'), ('query', 'query=foo&amp;opt=val')])
+
+Should match expected urlparse result:
+	OrderedDict([('scheme', 'http'), ('path', '/service'), ('query', 'query=foo&amp;opt=val')])
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
-<tr id='pt1.50' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[http://example.org/service?query=foo#id]</div></td>
-    <td colspan='5' align='center'>pass</td>
-</tr>
+<tr id='ft1.52' class='none'>
+    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[//example.org/service?query=foo&opt=val]</div></td>
+    <td colspan='5' align='center'>
 
-<tr id='pt1.51' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[http://example.org/service?query=foo&opt=val]</div></td>
-    <td colspan='5' align='center'>pass</td>
-</tr>
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.52')" >
+        fail</a>
 
-<tr id='pt1.52' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[//example.org/service?query=foo&opt=val]</div></td>
-    <td colspan='5' align='center'>pass</td>
+    <div id='div_ft1.52' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.52').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.52: Traceback (most recent call last):
+  File "test/py/main.py", line 66, in _test
+    % (url, groups, expected_urlparse)
+AssertionError: Testset[//example.org/service?query=foo&amp;opt=val]: urlparse comparison failure:
+	OrderedDict([('query', 'query=foo&amp;opt=val')])
+
+Should match expected urlparse result:
+	OrderedDict([('path', '/service'), ('query', 'query=foo&amp;opt=val')])
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
 <tr id='pt1.53' class='hiddenRow'>
@@ -1373,14 +1233,70 @@ Should match result:
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt1.56' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[http://example.org/with/very/long-path/to/file.etc]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.56' class='none'>
+    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[http://example.org/with/very/long-path/to/file.etc]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.56')" >
+        fail</a>
+
+    <div id='div_ft1.56' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.56').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.56: Traceback (most recent call last):
+  File "test/py/main.py", line 66, in _test
+    % (url, groups, expected_urlparse)
+AssertionError: Testset[http://example.org/with/very/long-path/to/file.etc]: urlparse comparison failure:
+	OrderedDict([('scheme', 'http')])
+
+Should match expected urlparse result:
+	OrderedDict([('scheme', 'http'), ('path', '/with/very/long-path/to/file.etc')])
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
-<tr id='pt1.57' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[http://dotmpe.com/schema;v5/cllct;1#SomeType]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.57' class='none'>
+    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[http://dotmpe.com/schema;v5/cllct;1#SomeType]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.57')" >
+        fail</a>
+
+    <div id='div_ft1.57' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.57').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.57: Traceback (most recent call last):
+  File "test/py/main.py", line 66, in _test
+    % (url, groups, expected_urlparse)
+AssertionError: Testset[http://dotmpe.com/schema;v5/cllct;1#SomeType]: urlparse comparison failure:
+	OrderedDict([('scheme', 'http'), ('fragment', 'SomeType')])
+
+Should match expected urlparse result:
+	OrderedDict([('scheme', 'http'), ('path', '/schema;v5/cllct;1'), ('fragment', 'SomeType')])
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
 <tr id='pt1.58' class='hiddenRow'>
@@ -1393,19 +1309,103 @@ Should match result:
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt1.60' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[//example.org/path/to/file#id]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.60' class='none'>
+    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[//example.org/path/to/file#id]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.60')" >
+        fail</a>
+
+    <div id='div_ft1.60' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.60').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.60: Traceback (most recent call last):
+  File "test/py/main.py", line 66, in _test
+    % (url, groups, expected_urlparse)
+AssertionError: Testset[//example.org/path/to/file#id]: urlparse comparison failure:
+	OrderedDict([('fragment', 'id')])
+
+Should match expected urlparse result:
+	OrderedDict([('path', '/path/to/file'), ('fragment', 'id')])
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
-<tr id='pt1.61' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[//example.org/~admin]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.61' class='none'>
+    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[//example.org/~admin]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.61')" >
+        fail</a>
+
+    <div id='div_ft1.61' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.61').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.61: Traceback (most recent call last):
+  File "test/py/main.py", line 66, in _test
+    % (url, groups, expected_urlparse)
+AssertionError: Testset[//example.org/~admin]: urlparse comparison failure:
+	OrderedDict()
+
+Should match expected urlparse result:
+	OrderedDict([('path', '/~admin')])
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
-<tr id='pt1.62' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[ftp://usr:pwd@example.org:4321/pub/]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.62' class='none'>
+    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[ftp://usr:pwd@example.org:4321/pub/]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.62')" >
+        fail</a>
+
+    <div id='div_ft1.62' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.62').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.62: Traceback (most recent call last):
+  File "test/py/main.py", line 66, in _test
+    % (url, groups, expected_urlparse)
+AssertionError: Testset[ftp://usr:pwd@example.org:4321/pub/]: urlparse comparison failure:
+	OrderedDict([('scheme', 'ftp')])
+
+Should match expected urlparse result:
+	OrderedDict([('scheme', 'ftp'), ('path', '/pub/')])
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
 <tr id='pt1.63' class='hiddenRow'>
@@ -1423,24 +1423,136 @@ Should match result:
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt1.66' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[we+ird.3-scheme://user.info:etc-5;foo@host/path;params/dir/file?q]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.66' class='none'>
+    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[we+ird.3-scheme://user.info:etc-5;foo@host/path;params/dir/file?q]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.66')" >
+        fail</a>
+
+    <div id='div_ft1.66' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.66').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.66: Traceback (most recent call last):
+  File "test/py/main.py", line 66, in _test
+    % (url, groups, expected_urlparse)
+AssertionError: Testset[we+ird.3-scheme://user.info:etc-5;foo@host/path;params/dir/file?q]: urlparse comparison failure:
+	OrderedDict([('scheme', 'we+ird.3-scheme'), ('query', 'q')])
+
+Should match expected urlparse result:
+	OrderedDict([('scheme', 'we+ird.3-scheme'), ('path', '/path;params/dir/file'), ('query', 'q')])
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
-<tr id='pt1.67' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[file://localhost/translit/alexander-pope.criticism.edl]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.67' class='none'>
+    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[file://localhost/translit/alexander-pope.criticism.edl]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.67')" >
+        fail</a>
+
+    <div id='div_ft1.67' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.67').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.67: Traceback (most recent call last):
+  File "test/py/main.py", line 66, in _test
+    % (url, groups, expected_urlparse)
+AssertionError: Testset[file://localhost/translit/alexander-pope.criticism.edl]: urlparse comparison failure:
+	OrderedDict([('scheme', 'file')])
+
+Should match expected urlparse result:
+	OrderedDict([('scheme', 'file'), ('path', '/translit/alexander-pope.criticism.edl')])
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
-<tr id='pt1.68' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[irc://host/channel]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.68' class='none'>
+    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[irc://host/channel]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.68')" >
+        fail</a>
+
+    <div id='div_ft1.68' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.68').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.68: Traceback (most recent call last):
+  File "test/py/main.py", line 66, in _test
+    % (url, groups, expected_urlparse)
+AssertionError: Testset[irc://host/channel]: urlparse comparison failure:
+	OrderedDict([('scheme', 'irc')])
+
+Should match expected urlparse result:
+	OrderedDict([('scheme', 'irc'), ('path', '/channel')])
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
-<tr id='pt1.69' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[//host.name/channel]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.69' class='none'>
+    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[//host.name/channel]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.69')" >
+        fail</a>
+
+    <div id='div_ft1.69' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.69').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.69: Traceback (most recent call last):
+  File "test/py/main.py", line 66, in _test
+    % (url, groups, expected_urlparse)
+AssertionError: Testset[//host.name/channel]: urlparse comparison failure:
+	OrderedDict()
+
+Should match expected urlparse result:
+	OrderedDict([('path', '/channel')])
+
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
 <tr id='pt1.70' class='hiddenRow'>
@@ -1529,7 +1641,7 @@ pt1.78: Not testing for with key opaque_part
         <pre>
         
 ft1.80: Traceback (most recent call last):
-  File "test/py/main.py", line 86, in _test
+  File "test/py/main.py", line 96, in _test
     assert str(v) == e, "%s: %r != %r, %s" % (k, v, e, parsed)
 AssertionError: path: '/schema;v5/cllct' != '/schema;v5/cllct;1', ParseResult(scheme='http', netloc='dotmpe.com', path='/schema;v5/cllct', params='1', query='', fragment='SomeType')
 
@@ -1661,32 +1773,9 @@ pt1.88: Not testing for with key opaque_part
     </td>
 </tr>
 
-<tr id='ft1.89' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_stdlib_compare[we+ird.3-scheme://user.info:etc-5;foo@host/path;params/dir/file?q]</div></td>
-    <td colspan='5' align='center'>
-
-    <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.89')" >
-        fail</a>
-
-    <div id='div_ft1.89' class="popup_window">
-        <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.89').style.display = 'none' " >
-           [x]</a>
-        </div>
-        <pre>
-        
-ft1.89: Traceback (most recent call last):
-  File "test/py/main.py", line 86, in _test
-    assert str(v) == e, "%s: %r != %r, %s" % (k, v, e, parsed)
-AssertionError: path: '/path;params/dir/file?q' != '/path;params/dir/file', ParseResult(scheme='we+ird.3-scheme', netloc='user.info:etc-5;foo@host', path='/path;params/dir/file?q', params='', query='', fragment='')
-
-
-        </pre>
-    </div>
-    <!--css div popup end-->
-
-    </td>
+<tr id='pt1.89' class='hiddenRow'>
+    <td class='none'><div class='testcase'>_test: test_stdlib_compare[we+ird.3-scheme://user.info:etc-5;foo@host/path;params/dir/file?q]</div></td>
+    <td colspan='5' align='center'>pass</td>
 </tr>
 
 <tr id='pt1.90' class='hiddenRow'>
@@ -1707,8 +1796,8 @@ AssertionError: path: '/path;params/dir/file?q' != '/path;params/dir/file', Pars
 <tr id='total_row'>
     <td>Total</td>
     <td>92</td>
-    <td>59</td>
-    <td>33</td>
+    <td>56</td>
+    <td>36</td>
     <td>0</td>
     <td>&nbsp;</td>
 </tr>

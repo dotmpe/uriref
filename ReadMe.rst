@@ -12,8 +12,6 @@ prepared to put in time for testing that it does what you need.
 
 .. figure:: doc/stdlib-comparison.svg
    :target: doc/stdlib-comparison.png
-   :width: 45em
-   :height: 55em
    :class: diagram
 
    uriref reference matching, compared to stdlib urlparse for several
@@ -31,10 +29,22 @@ prepared to put in time for testing that it does what you need.
 There are almost 100 tests, a good bunch of which need to be reviewed (33
 failures). The modules has 34% test coverage.
 
+See `uriref <src/py/uriref.py>`__.
+
+Tests
+-----
+::
+
+  make test
+
 `Coverage report <doc/htmlcov/index.html>`_ 
 and `test results <doc/uriref_testreport.html>`_ are available in html.
 
-See `uriref <src/py/uriref.py>`__.
+There are tests that show for which sort of URLs uriref is compatible with
+stdlib urlparse. 
+
+The setup should be fixed by splitting up the expected test results to
+function. Currently there is one set of parameters for all test methods.
 
 .. dont work on github
 .. .. include:: src/py/uriref.py
@@ -42,3 +52,4 @@ See `uriref <src/py/uriref.py>`__.
       :end-line: 189
 
 .. vim:ft=rst:
+

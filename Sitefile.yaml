@@ -1,0 +1,4 @@
+sitefile: '0.1'
+routes:
+    ReadMe: 'rst2html:ReadMe'
+    doc: 'static:doc'
