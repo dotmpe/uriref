@@ -33,7 +33,7 @@ if '-csv' in sys.argv:
     p.enable(False, False)
     for i in (10, 100, 1000):#, 10000):#, 100000):
         for fn in ('uriref', 'stdlib'):
-            print fn, 'start', h.heap().diff(mainheap)
+            #print fn, 'start', h.heap().diff(mainheap)
             mean = []
             for m in (1, 2, 3, 4):
                 p.runcall(locals()[fn+'_test'], i)
@@ -45,7 +45,7 @@ if '-csv' in sys.argv:
             times = ', '.join(map(str, mean))
             print "%s, %s, %s, %s" % (fn, len(fictional_urls), i, times)
             sys.stdout.flush()
-            print fn, 'end', h.heap().diff(mainheap)
+            #print fn, 'end', h.heap().diff(mainheap)
 else:
     print "uriref RegEx implementation: "
 #cProfile.run("uriref_test(10000)")

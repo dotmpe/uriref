@@ -4,6 +4,8 @@ MK                  += $(MK_$d)
 #
 #      ------------ -- 
 
+log_line            = $(ll) "$1" "$2" "$3" "$4"$
+
 SRC_$d              := $/uriref/__init__.py
 
 TRGT_$d             := 
@@ -27,7 +29,7 @@ profile_$d:: $/doc/stdlib-comparison.png $/doc/stdlib-comparison.svg
 
 $/doc/stdlib-comparison.svg $/doc/stdlib-comparison.png: $Bstdlib-comparison.csv
 
-$Bstdlib-comparison.csv: $(SRC_$d) $/Rules.mk $/Makefile
+$Bstdlib-comparison.csv: $(SRC_$d) $/Rules.mk $/Makefile $/test/py/profile.py
 	@$(call log_line,info,$@,..);\
 	$(python-urllib-profile)
 	@$(call log_line,ok,$@)

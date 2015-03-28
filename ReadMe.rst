@@ -30,7 +30,9 @@ prepared to put in time for testing that it does what you need.
 There are almost 100 tests, a good bunch of which need to be reviewed (33
 failures). The modules has 34% test coverage.
 
-`Coverage report`_ is available in html.
+`Coverage report <doc/htmlcov/index.html>`_ 
+and `test results <doc/uriref_testreport.html>`_ are available in html.
+
 See `uriref <src/py/uriref.py>`__.
 
 .. dont work on github
