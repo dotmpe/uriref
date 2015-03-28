@@ -10,7 +10,7 @@ Python uriref
 This is an experimental library. Do not use it in production unless you are
 prepared to put in time for testing that it does what you need.
 
-.. figure:: doc/stdlib-comparison.svg
+.. figure:: blob/master/doc/stdlib-comparison.svg
    :width: 45em
    :height: 55em
    :class: diagram
