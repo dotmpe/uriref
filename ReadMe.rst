@@ -1,11 +1,27 @@
 Python uriref
 ==============
-:Last-Update: 2011-02-13
-:Homepage: https://launchpad.net/uriref
-:Description:
+:version: 0.0.2
+:last-update: 2011-02-13
+:description:
   URL and URN parser written in regular expressions. 
   Based on RFC 2396 BNF terms, update to RFC 3986 planned but not started.
-:License: FreeBSD
+:license: FreeBSD
+:package status: 
+
+  .. image:: https://gemnasium.com/dotmpe/uriref.png
+     :target: https://gemnasium.com/dotmpe/uriref
+     :alt: Dependencies
+
+  .. image:: https://secure.travis-ci.org/dotmpe/uriref.png
+     :target: https://travis-ci.org/dotmpe/uriref
+     :alt: Build
+
+:repository:
+
+  .. image:: https://badge.fury.io/gh/dotmpe%2Furiref.png
+     :target: http://badge.fury.io/gh/dotmpe%2Furiref
+     :alt: GIT
+
 
 This is an experimental library. Do not use it in production unless you are
 prepared to put in time for testing that it does what you need.

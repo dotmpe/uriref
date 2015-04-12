@@ -1,4 +1,8 @@
-sitefile: '0.1'
+sitefile: 0.0.2
 routes:
     ReadMe: 'rst2html:ReadMe'
     doc: 'static:doc'
+params:
+  rst2html:
+    stylesheets:
+
