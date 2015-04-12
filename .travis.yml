@@ -3,7 +3,7 @@
 before_install: python setup.py build
 install: python setup.py install
 before_script: 
-script: ./bin/parseuri.py
+script: "./bin/parseuri.py http://example.net/path;param/name?query#fragment"
 after_sucess:
 after_failure:
 after_script:
