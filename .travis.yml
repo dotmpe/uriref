@@ -3,7 +3,7 @@
 before_install: python setup.py build
 install: python setup.py install
 before_script: 
-#script: python setup.py
+script: ./bin/parseuri.py
 after_sucess:
 after_failure:
 after_script:
