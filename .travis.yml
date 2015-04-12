@@ -1,3 +1,17 @@
 language: python
+before_install:
+install:
 #install: pip install tox --use-mirrors
+before_script:
+script:
 #script: tox
+after_sucess:
+after_failure:
+after_script:
+
+branches:
+  only:
+  - master
+  - /^v[0-9]+.[0-9]+.[0-9]+$
+
+env:
