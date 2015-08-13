@@ -66,12 +66,8 @@ def print_regex_table(uri):
     print match_groupdict_table(uri, match)
     print
 
-
-
-### Main
-if __name__ == '__main__':
+def parse_uri():
     import sys
-
     uris = sys.argv[1:]
     status = 0
     if not sys.argv[1:]:
@@ -90,3 +86,8 @@ if __name__ == '__main__':
         print_regex_table(uri)
 
     sys.exit(status)
+
+
+### Main
+if __name__ == '__main__':
+    parse_uri()
