@@ -45,7 +45,7 @@ prepared to put in time for testing that it does what you need.
 There are almost 100 tests, a good bunch of which need to be reviewed (33
 failures). The modules has 34% test coverage.
 
-See `uriref <src/py/uriref.py>`__.
+See `uriref <uriref/__init__.py>`__.
 
 Tests
 -----
@@ -63,7 +63,7 @@ The setup should be fixed by splitting up the expected test results to
 function. Currently there is one set of parameters for all test methods.
 
 .. dont work on github
-.. .. include:: src/py/uriref.py
+.. .. include:: uriref/__init__.py
       :start-line: 1
       :end-line: 189
 
