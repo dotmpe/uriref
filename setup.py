@@ -21,7 +21,10 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     long_description = """\
-URL and URN parser written in regular expressions. 
-Based on RFC 2396 BNF terms, update to RFC 3986 planned but not started.
-"""
+URL and URN parser written in regular expressions.
+Based on RFC 2396 BNF terms. No revieto RFC 3986 planned but not started.
+""",
+    scripts = [
+        'bin/parseuri.py',
+    ],
 )
