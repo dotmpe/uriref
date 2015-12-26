@@ -39,17 +39,25 @@ prepared to put in time for testing that it does what you need.
    by almost 100%. The latter runs at slighty above 6e-4 seconds,
    with the former at ~3.5e-4 seconds (at my machine).
 
-   Memory profiling remains to be done, I guess regex is taking a lot
+   Memory profiling remains to be done, I expect regex is taking a lot
    more.
 
 There are almost 100 tests, a good bunch of which need to be reviewed (33
 failures). The modules has 34% test coverage.
 
-See `uriref <uriref/__init__.py>`__.
+Installation of library and `parseuri.py` is via::
+
+  python setup.py install
+
+For lib source see `uriref <uriref/__init__.py>`__.
 
 Tests
 -----
 ::
+
+  python test/py/main.py
+
+Or::
 
   make test
 
@@ -59,7 +67,7 @@ and `test results <doc/uriref_testreport.html>`_ are available in html.
 There are tests that show for which sort of URLs uriref is compatible with
 stdlib urlparse. 
 
-The setup should be fixed by splitting up the expected test results to
+TODO The setup should be fixed by splitting up the expected test results to
 function. Currently there is one set of parameters for all test methods.
 
 .. dont work on github
