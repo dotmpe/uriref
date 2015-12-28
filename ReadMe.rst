@@ -26,7 +26,7 @@ Python uriref
 This is an experimental library. Do not use it in production unless you are
 prepared to put in time for testing that it does what you need.
 
-.. figure:: https://raw.githubusercontent.com/dotmpe/uriref/master/doc/stdlib-comparison.svg
+.. figure:: https://cdn.rawgit.com/dotmpe/uriref/master/doc/stdlib-comparison.svg
    :class: diagram
 
    uriref reference matching, compared to stdlib urlparse for several
