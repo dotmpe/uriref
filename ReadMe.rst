@@ -3,10 +3,10 @@ Python uriref
 :version: 0.0.2
 :last-update: 2011-02-13
 :description:
-  URL and URN parser written in regular expressions. 
+  URL and URN parser written in regular expressions.
   Based on RFC 2396 BNF terms, update to RFC 3986 planned but not started.
 :license: FreeBSD
-:package status: 
+:package status:
 
   .. image:: https://gemnasium.com/dotmpe/uriref.png
      :target: https://gemnasium.com/dotmpe/uriref
@@ -26,8 +26,7 @@ Python uriref
 This is an experimental library. Do not use it in production unless you are
 prepared to put in time for testing that it does what you need.
 
-.. figure:: doc/stdlib-comparison.svg
-   :target: doc/stdlib-comparison.png
+.. figure:: https://raw.githubusercontent.com/dotmpe/uriref/master/doc/stdlib-comparison.svg
    :class: diagram
 
    uriref reference matching, compared to stdlib urlparse for several
@@ -61,11 +60,11 @@ Or::
 
   make test
 
-`Coverage report <doc/htmlcov/index.html>`_ 
+`Coverage report <doc/htmlcov/index.html>`_
 and `test results <doc/uriref_testreport.html>`_ are available in html.
 
 There are tests that show for which sort of URLs uriref is compatible with
-stdlib urlparse. 
+stdlib urlparse.
 
 TODO The setup should be fixed by splitting up the expected test results to
 function. Currently there is one set of parameters for all test methods.
