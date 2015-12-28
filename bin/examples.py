@@ -1,4 +1,5 @@
-from parseuri import print_regex_table
+import uriref
+from uriref import util
 
 if __name__ == '__main__':
     import sys
@@ -24,6 +25,10 @@ if __name__ == '__main__':
         uris.insert(0, 'urn:root')
 
     for uri in uris:
-        print_regex_table(uri)
+        match = uriref.match(uri)
+        print util.match_groupdict_table(uri, match)
+        print
+
+
 
 

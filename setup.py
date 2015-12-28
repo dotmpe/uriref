@@ -25,6 +25,6 @@ URL and URN parser written in regular expressions.
 Based on RFC 2396 BNF terms. No revieto RFC 3986 planned but not started.
 """,
     scripts = [
-        'bin/parseuri.py',
+        'bin/uriref-cli.py',
     ],
 )

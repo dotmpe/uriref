@@ -171,7 +171,7 @@ Examples of references
   query       :         query=foo
 
 
-See bin/parseuri for interactive parsing and tabular parts rendering.
+See bin/uriref-cli for interactive parsing and tabular parts rendering.
 
 Misc.
 -----
@@ -474,9 +474,9 @@ class URIRef(str):
 	formatting back to string representation again.
 
 	This does only match the RFC terms. Iow. no (sub)domain, user/pwd, or query
-	parts available. 
-	
-	The uriref project comes with a command line tool 'parseuri' that pretty
+	parts available.
+
+	The uriref project comes with a command line tool 'uriref-cli' that pretty
 	prints a table of all parts given a uriref instance as argument.
 	"""
 
