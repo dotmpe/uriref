@@ -1,9 +1,12 @@
 # Build cycle
 
 before_install: python setup.py build
-install: python setup.py install
+install: 
+- pip install -r requirements.txt
+- python setup.py install
+
 before_script: 
-script: "./bin/uriref-cli.py parse-uri 'http://example.net/path;param/name?query#fragment'"
+script: "./bin/uriref-cli.py -s parseuri 'http://example.net/path;param/name?query#fragment'"
 after_sucess:
 after_failure:
 after_script:
