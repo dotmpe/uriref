@@ -88,9 +88,9 @@ def table_writer(uri, match, file, opts):
 writers['ptable'] = table_writer
 
 
-def plain_wrier(uri, match, file, opts):
+def plain_writer(uri, match, file, opts):
     print >>file, uri
-writers['plain'] = plain_wrier
+writers['plain'] = plain_writer
 
 
 #def json_writer(data, file, opts):
