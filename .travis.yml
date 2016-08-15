@@ -6,7 +6,7 @@ install:
 - python setup.py install
 before_script: []
 script: 
-- ./bin/uriref-cli.py parse-uri 'http://example.net/path;param/name?query#fragment'
+- ./test/main.sh
 after_sucess: []
 after_failure: []
 after_script: []
