@@ -24,6 +24,7 @@ branches:
 
 env:
   global:
+  - Build_Deps_Default_Paths=1
   - ENV=
   matrix: [] 
 
