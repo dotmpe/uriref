@@ -1,7 +1,9 @@
 # Build cycle
 
 before_install: python setup.py build
-install: python setup.py install
+install:
+  - "source ./install-dependencies.sh && install_docopt"
+  - python setup.py install
 before_script: 
 script: "./bin/parseuri.py 'http://example.net/path;param/name?query#fragment'"
 after_sucess:
@@ -12,7 +14,7 @@ after_script:
 
 language: python
 python:
-- 2.6
+#- 2.6
 - 2.7
 
 branches:
@@ -21,5 +23,7 @@ branches:
   - '/^[0-9]*\.[0-9]*\.[0-9]*/'
 
 env:
-- ENV=
+  global:
+  - ENV=
+  matrix: [] 
 
