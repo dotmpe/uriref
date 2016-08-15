@@ -1,30 +1,31 @@
 # Build cycle
 
 before_install: python setup.py build
-install: 
-  - "source ./install-dependencies.sh && install_docopt"
-- pip install -r requirements.txt
-  - python setup.py install
-before_script: 
-script: "./bin/uriref-cli.py -s parseuri 'http://example.net/path;param/name?query#fragment'"
-after_sucess:
-after_failure:
-after_script:
+install:
+- "source ./install-dependencies.sh && install_docopt"
+- python setup.py install
+#before_script: []
+script: ./test/main.sh
+#after_success: []
+#after_failure: []
+#after_script: []
 
 # Other params
 
 language: python
 python:
-#- 2.6
+- 2.6
 - 2.7
 
-branches:
-  only:
-  - test
-  - '/^[0-9]*\.[0-9]*\.[0-9]*/'
+#branches:
+#  only: []
+    #  - test
+    #  - '/^[0-9]*\.[0-9]*\.[0-9]*/'
 
 env:
   global:
+  - PYTHONPATH=/home/travis/.local/lib/python2.7/site-packages/:$PYTHONPATH
+  - Build_Deps_Default_Paths=1
   - ENV=
   matrix: [] 
 
