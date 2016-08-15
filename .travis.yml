@@ -2,25 +2,25 @@
 
 before_install: python setup.py build
 install:
-  - "source ./install-dependencies.sh && install_docopt"
-  - python setup.py install
-before_script: 
+- "source ./install-dependencies.sh && install_docopt"
+- python setup.py install
+before_script: []
 script: "./bin/uriref-cli.py parse-uri 'http://example.net/path;param/name?query#fragment'"
-after_sucess:
-after_failure:
-after_script:
+after_sucess: []
+after_failure: []
+after_script: []
 
 # Other params
 
 language: python
 python:
-#- 2.6
 - 2.7
+#- 2.6
 
 branches:
-  only:
-  - test
-  - '/^[0-9]*\.[0-9]*\.[0-9]*/'
+  only: []
+    #  - test
+    #  - '/^[0-9]*\.[0-9]*\.[0-9]*/'
 
 env:
   global:
