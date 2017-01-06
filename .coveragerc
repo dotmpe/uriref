@@ -1,7 +1,7 @@
 # .coveragerc to control coverage.py
 [run]
 branch = True
-parallel_mode = True
+parallel = True
 
 [report]
 # Regexes for lines to exclude from consideration
@@ -29,5 +29,5 @@ omit = test/*
 directory = htmlcov
 
 [xml]
-file = coverage.xml
+output = coverage.xml
 

@@ -189,9 +189,9 @@ function showOutput(id, name) {
 
 <div class='heading'>
 <h1>URIRef test results</h1>
-<p class='attribute'><strong>Start Time:</strong> 2015-03-28 04:04:59</p>
-<p class='attribute'><strong>Duration:</strong> 0:00:00.015155</p>
-<p class='attribute'><strong>Status:</strong> Pass 56 Failure 36</p>
+<p class='attribute'><strong>Start Time:</strong> 2017-01-06 14:56:13</p>
+<p class='attribute'><strong>Duration:</strong> 0:00:00.014463</p>
+<p class='attribute'><strong>Status:</strong> Pass 47 Failure 23 Error 22</p>
 
 <p class='description'></p>
 </div>
@@ -221,12 +221,12 @@ function showOutput(id, name) {
     <td>View</td>
 </tr>
 
-<tr class='failClass'>
+<tr class='errorClass'>
     <td>unittest.case.FunctionTestCase: A test case that wraps a test function.</td>
     <td>92</td>
-    <td>56</td>
-    <td>36</td>
-    <td>0</td>
+    <td>47</td>
+    <td>23</td>
+    <td>22</td>
     <td><a href="javascript:showClassDetail('c1',92)">Detail</a></td>
 </tr>
 
@@ -1048,18 +1048,43 @@ Different from urlparse:
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt1.47' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[file:/simple/path/to/file.ext]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.47' class='none'>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[file:/simple/path/to/file.ext]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.47')" >
+        error</a>
+
+    <div id='div_ft1.47' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.47').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.47: Traceback (most recent call last):
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
 <tr id='ft1.48' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[file://host/some/path;param/to/file.etc]</div></td>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[file://host/some/path;param/to/file.etc]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
     <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.48')" >
-        fail</a>
+        error</a>
 
     <div id='div_ft1.48' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
@@ -1069,14 +1094,11 @@ Different from urlparse:
         <pre>
         
 ft1.48: Traceback (most recent call last):
-  File "test/py/main.py", line 66, in _test
-    % (url, groups, expected_urlparse)
-AssertionError: Testset[file://host/some/path;param/to/file.etc]: urlparse comparison failure:
-	OrderedDict([('scheme', 'file')])
-
-Should match expected urlparse result:
-	OrderedDict([('scheme', 'file'), ('path', '/some/path;param/to/file.etc')])
-
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
 
 
         </pre>
@@ -1087,12 +1109,12 @@ Should match expected urlparse result:
 </tr>
 
 <tr id='ft1.49' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[http://example.org/path]</div></td>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[http://example.org/path]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
     <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.49')" >
-        fail</a>
+        error</a>
 
     <div id='div_ft1.49' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
@@ -1102,14 +1124,11 @@ Should match expected urlparse result:
         <pre>
         
 ft1.49: Traceback (most recent call last):
-  File "test/py/main.py", line 66, in _test
-    % (url, groups, expected_urlparse)
-AssertionError: Testset[http://example.org/path]: urlparse comparison failure:
-	OrderedDict([('scheme', 'http')])
-
-Should match expected urlparse result:
-	OrderedDict([('scheme', 'http'), ('path', '/path')])
-
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
 
 
         </pre>
@@ -1153,12 +1172,12 @@ Should match expected urlparse result:
 </tr>
 
 <tr id='ft1.51' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[http://example.org/service?query=foo&opt=val]</div></td>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[http://example.org/service?query=foo&opt=val]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
     <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.51')" >
-        fail</a>
+        error</a>
 
     <div id='div_ft1.51' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
@@ -1168,14 +1187,11 @@ Should match expected urlparse result:
         <pre>
         
 ft1.51: Traceback (most recent call last):
-  File "test/py/main.py", line 66, in _test
-    % (url, groups, expected_urlparse)
-AssertionError: Testset[http://example.org/service?query=foo&amp;opt=val]: urlparse comparison failure:
-	OrderedDict([('scheme', 'http'), ('query', 'query=foo&amp;opt=val')])
-
-Should match expected urlparse result:
-	OrderedDict([('scheme', 'http'), ('path', '/service'), ('query', 'query=foo&amp;opt=val')])
-
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 386, in urlparse
+    md['fragment'] or ''
+KeyError: 'fragment'
 
 
         </pre>
@@ -1186,12 +1202,12 @@ Should match expected urlparse result:
 </tr>
 
 <tr id='ft1.52' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[//example.org/service?query=foo&opt=val]</div></td>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[//example.org/service?query=foo&opt=val]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
     <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.52')" >
-        fail</a>
+        error</a>
 
     <div id='div_ft1.52' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
@@ -1201,14 +1217,11 @@ Should match expected urlparse result:
         <pre>
         
 ft1.52: Traceback (most recent call last):
-  File "test/py/main.py", line 66, in _test
-    % (url, groups, expected_urlparse)
-AssertionError: Testset[//example.org/service?query=foo&amp;opt=val]: urlparse comparison failure:
-	OrderedDict([('query', 'query=foo&amp;opt=val')])
-
-Should match expected urlparse result:
-	OrderedDict([('path', '/service'), ('query', 'query=foo&amp;opt=val')])
-
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 386, in urlparse
+    md['fragment'] or ''
+KeyError: 'fragment'
 
 
         </pre>
@@ -1218,28 +1231,103 @@ Should match expected urlparse result:
     </td>
 </tr>
 
-<tr id='pt1.53' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[/service?query=foo]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.53' class='none'>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[/service?query=foo]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.53')" >
+        error</a>
+
+    <div id='div_ft1.53' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.53').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.53: Traceback (most recent call last):
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 386, in urlparse
+    md['fragment'] or ''
+KeyError: 'fragment'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
-<tr id='pt1.54' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[./service?query=foo]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.54' class='none'>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[./service?query=foo]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.54')" >
+        error</a>
+
+    <div id='div_ft1.54' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.54').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.54: Traceback (most recent call last):
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 386, in urlparse
+    md['fragment'] or ''
+KeyError: 'fragment'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
-<tr id='pt1.55' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[service?query=foo]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.55' class='none'>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[service?query=foo]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.55')" >
+        error</a>
+
+    <div id='div_ft1.55' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.55').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.55: Traceback (most recent call last):
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
 <tr id='ft1.56' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[http://example.org/with/very/long-path/to/file.etc]</div></td>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[http://example.org/with/very/long-path/to/file.etc]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
     <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.56')" >
-        fail</a>
+        error</a>
 
     <div id='div_ft1.56' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
@@ -1249,14 +1337,11 @@ Should match expected urlparse result:
         <pre>
         
 ft1.56: Traceback (most recent call last):
-  File "test/py/main.py", line 66, in _test
-    % (url, groups, expected_urlparse)
-AssertionError: Testset[http://example.org/with/very/long-path/to/file.etc]: urlparse comparison failure:
-	OrderedDict([('scheme', 'http')])
-
-Should match expected urlparse result:
-	OrderedDict([('scheme', 'http'), ('path', '/with/very/long-path/to/file.etc')])
-
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
 
 
         </pre>
@@ -1267,12 +1352,12 @@ Should match expected urlparse result:
 </tr>
 
 <tr id='ft1.57' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[http://dotmpe.com/schema;v5/cllct;1#SomeType]</div></td>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[http://dotmpe.com/schema;v5/cllct;1#SomeType]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
     <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.57')" >
-        fail</a>
+        error</a>
 
     <div id='div_ft1.57' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
@@ -1282,14 +1367,11 @@ Should match expected urlparse result:
         <pre>
         
 ft1.57: Traceback (most recent call last):
-  File "test/py/main.py", line 66, in _test
-    % (url, groups, expected_urlparse)
-AssertionError: Testset[http://dotmpe.com/schema;v5/cllct;1#SomeType]: urlparse comparison failure:
-	OrderedDict([('scheme', 'http'), ('fragment', 'SomeType')])
-
-Should match expected urlparse result:
-	OrderedDict([('scheme', 'http'), ('path', '/schema;v5/cllct;1'), ('fragment', 'SomeType')])
-
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
 
 
         </pre>
@@ -1299,23 +1381,73 @@ Should match expected urlparse result:
     </td>
 </tr>
 
-<tr id='pt1.58' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[../relative/path/to/file]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.58' class='none'>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[../relative/path/to/file]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.58')" >
+        error</a>
+
+    <div id='div_ft1.58' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.58').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.58: Traceback (most recent call last):
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
-<tr id='pt1.59' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[./rel/1]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.59' class='none'>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[./rel/1]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.59')" >
+        error</a>
+
+    <div id='div_ft1.59' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.59').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.59: Traceback (most recent call last):
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
 <tr id='ft1.60' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[//example.org/path/to/file#id]</div></td>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[//example.org/path/to/file#id]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
     <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.60')" >
-        fail</a>
+        error</a>
 
     <div id='div_ft1.60' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
@@ -1325,14 +1457,11 @@ Should match expected urlparse result:
         <pre>
         
 ft1.60: Traceback (most recent call last):
-  File "test/py/main.py", line 66, in _test
-    % (url, groups, expected_urlparse)
-AssertionError: Testset[//example.org/path/to/file#id]: urlparse comparison failure:
-	OrderedDict([('fragment', 'id')])
-
-Should match expected urlparse result:
-	OrderedDict([('path', '/path/to/file'), ('fragment', 'id')])
-
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
 
 
         </pre>
@@ -1343,12 +1472,12 @@ Should match expected urlparse result:
 </tr>
 
 <tr id='ft1.61' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[//example.org/~admin]</div></td>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[//example.org/~admin]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
     <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.61')" >
-        fail</a>
+        error</a>
 
     <div id='div_ft1.61' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
@@ -1358,14 +1487,11 @@ Should match expected urlparse result:
         <pre>
         
 ft1.61: Traceback (most recent call last):
-  File "test/py/main.py", line 66, in _test
-    % (url, groups, expected_urlparse)
-AssertionError: Testset[//example.org/~admin]: urlparse comparison failure:
-	OrderedDict()
-
-Should match expected urlparse result:
-	OrderedDict([('path', '/~admin')])
-
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
 
 
         </pre>
@@ -1376,12 +1502,12 @@ Should match expected urlparse result:
 </tr>
 
 <tr id='ft1.62' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[ftp://usr:pwd@example.org:4321/pub/]</div></td>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[ftp://usr:pwd@example.org:4321/pub/]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
     <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.62')" >
-        fail</a>
+        error</a>
 
     <div id='div_ft1.62' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
@@ -1391,14 +1517,11 @@ Should match expected urlparse result:
         <pre>
         
 ft1.62: Traceback (most recent call last):
-  File "test/py/main.py", line 66, in _test
-    % (url, groups, expected_urlparse)
-AssertionError: Testset[ftp://usr:pwd@example.org:4321/pub/]: urlparse comparison failure:
-	OrderedDict([('scheme', 'ftp')])
-
-Should match expected urlparse result:
-	OrderedDict([('scheme', 'ftp'), ('path', '/pub/')])
-
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
 
 
         </pre>
@@ -1408,28 +1531,103 @@ Should match expected urlparse result:
     </td>
 </tr>
 
-<tr id='pt1.63' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[mailto:mailbox@example.org]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.63' class='none'>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[mailto:mailbox@example.org]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.63')" >
+        error</a>
+
+    <div id='div_ft1.63' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.63').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.63: Traceback (most recent call last):
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
-<tr id='pt1.64' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[mailbox@example.org]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.64' class='none'>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[mailbox@example.org]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.64')" >
+        error</a>
+
+    <div id='div_ft1.64' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.64').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.64: Traceback (most recent call last):
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
-<tr id='pt1.65' class='hiddenRow'>
-    <td class='none'><div class='testcase'>_test: test_uriref_urlparse[mid:some-message@example.org]</div></td>
-    <td colspan='5' align='center'>pass</td>
+<tr id='ft1.65' class='none'>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[mid:some-message@example.org]</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.65')" >
+        error</a>
+
+    <div id='div_ft1.65' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.65').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft1.65: Traceback (most recent call last):
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
 <tr id='ft1.66' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[we+ird.3-scheme://user.info:etc-5;foo@host/path;params/dir/file?q]</div></td>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[we+ird.3-scheme://user.info:etc-5;foo@host/path;params/dir/file?q]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
     <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.66')" >
-        fail</a>
+        error</a>
 
     <div id='div_ft1.66' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
@@ -1439,14 +1637,11 @@ Should match expected urlparse result:
         <pre>
         
 ft1.66: Traceback (most recent call last):
-  File "test/py/main.py", line 66, in _test
-    % (url, groups, expected_urlparse)
-AssertionError: Testset[we+ird.3-scheme://user.info:etc-5;foo@host/path;params/dir/file?q]: urlparse comparison failure:
-	OrderedDict([('scheme', 'we+ird.3-scheme'), ('query', 'q')])
-
-Should match expected urlparse result:
-	OrderedDict([('scheme', 'we+ird.3-scheme'), ('path', '/path;params/dir/file'), ('query', 'q')])
-
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 386, in urlparse
+    md['fragment'] or ''
+KeyError: 'fragment'
 
 
         </pre>
@@ -1457,12 +1652,12 @@ Should match expected urlparse result:
 </tr>
 
 <tr id='ft1.67' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[file://localhost/translit/alexander-pope.criticism.edl]</div></td>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[file://localhost/translit/alexander-pope.criticism.edl]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
     <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.67')" >
-        fail</a>
+        error</a>
 
     <div id='div_ft1.67' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
@@ -1472,14 +1667,11 @@ Should match expected urlparse result:
         <pre>
         
 ft1.67: Traceback (most recent call last):
-  File "test/py/main.py", line 66, in _test
-    % (url, groups, expected_urlparse)
-AssertionError: Testset[file://localhost/translit/alexander-pope.criticism.edl]: urlparse comparison failure:
-	OrderedDict([('scheme', 'file')])
-
-Should match expected urlparse result:
-	OrderedDict([('scheme', 'file'), ('path', '/translit/alexander-pope.criticism.edl')])
-
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
 
 
         </pre>
@@ -1490,12 +1682,12 @@ Should match expected urlparse result:
 </tr>
 
 <tr id='ft1.68' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[irc://host/channel]</div></td>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[irc://host/channel]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
     <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.68')" >
-        fail</a>
+        error</a>
 
     <div id='div_ft1.68' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
@@ -1505,14 +1697,11 @@ Should match expected urlparse result:
         <pre>
         
 ft1.68: Traceback (most recent call last):
-  File "test/py/main.py", line 66, in _test
-    % (url, groups, expected_urlparse)
-AssertionError: Testset[irc://host/channel]: urlparse comparison failure:
-	OrderedDict([('scheme', 'irc')])
-
-Should match expected urlparse result:
-	OrderedDict([('scheme', 'irc'), ('path', '/channel')])
-
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
 
 
         </pre>
@@ -1523,12 +1712,12 @@ Should match expected urlparse result:
 </tr>
 
 <tr id='ft1.69' class='none'>
-    <td class='failCase'><div class='testcase'>_test: test_uriref_urlparse[//host.name/channel]</div></td>
+    <td class='errorCase'><div class='testcase'>_test: test_uriref_urlparse[//host.name/channel]</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
     <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.69')" >
-        fail</a>
+        error</a>
 
     <div id='div_ft1.69' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
@@ -1538,14 +1727,11 @@ Should match expected urlparse result:
         <pre>
         
 ft1.69: Traceback (most recent call last):
-  File "test/py/main.py", line 66, in _test
-    % (url, groups, expected_urlparse)
-AssertionError: Testset[//host.name/channel]: urlparse comparison failure:
-	OrderedDict()
-
-Should match expected urlparse result:
-	OrderedDict([('path', '/channel')])
-
+  File "test/py/main.py", line 59, in _test
+    expected_urlparse = uriref.urlparse(url, expected)._asdict()
+  File "/usr/local/lib/python2.7/site-packages/uriref/__init__.py", line 385, in urlparse
+    md['query'] or '',
+KeyError: 'query'
 
 
         </pre>
@@ -1796,9 +1982,9 @@ pt1.88: Not testing for with key opaque_part
 <tr id='total_row'>
     <td>Total</td>
     <td>92</td>
-    <td>56</td>
-    <td>36</td>
-    <td>0</td>
+    <td>47</td>
+    <td>23</td>
+    <td>22</td>
     <td>&nbsp;</td>
 </tr>
 </table>

@@ -191,6 +191,7 @@ References
 import re
 import urlparse as stdlib_urlparse
 
+import util
 
 
 # Expressions
@@ -474,10 +475,10 @@ class URIRef(str):
 	formatting back to string representation again.
 
 	This does only match the RFC terms. Iow. no (sub)domain, user/pwd, or query
-	parts available.
+	sub-parts available.
 
-	The uriref project comes with a command line tool 'uriref-cli' that pretty
-	prints a table of all parts given a uriref instance as argument.
+	The uriref project comes with a command line tool 'uriref-cli' that
+	pretty-prints a table of all parts given a uriref instance as argument.
 	"""
 
 	def __new__(type, *args, **kwds):
@@ -603,6 +604,9 @@ class URIRef(str):
 
 	def __repr__(self):
 		return "URIRef(%s)" % self
+
+	def original(self):
+	    pass
 
 	def __str__(self):
 		return "".join(self.generate_signature())

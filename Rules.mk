@@ -16,6 +16,7 @@ DMK_$d              :=
 define python-urllib-profile 
 	if test ! -e $(BUILD); then mkdir $(BUILD); fi
 	python test/py/profile.py -csv | tee $@
+	test -s "$@" || { echo "Empty CSV results" >&2; exit 1; }
 endef
 
 #      ------------ -- 
@@ -76,7 +77,7 @@ test_$d:
 #
 CLN_$d              := \
 	$(shell find $/ -name '*.pyc') \
-	$(wildcard .coverage htmlcov dist MANIFEST)
+	$(wildcard .coverage.* htmlcov dist MANIFEST)
 
 
 #      ------------ -- 

@@ -1,15 +1,76 @@
 #!/usr/bin/env python
 """Parse and pretty-print URI's.
 
- Copyright 2008, 2009, 2015  B. van Berkum <dev@dotmpe.com>
+ Copyright 2008, 2009, 2015, 2017  B. van Berkum <dev@dotmpe.com>
 
 """
-import uriref
+from optparse import Values
 
+from docopt import docopt
+import uriref
 from uriref import util
 
 
 __version__ = '0.0.3-dev-20170106' # uriref
+
+
+
+
+def get_opts(docstr, meta={}, version=None, argv=None):
+    """
+    Get docopt dict, and set argv and flags from get_optvalues.
+    """
+    if not argv:
+        import sys
+        argv = sys.argv[1:]
+    pattern, collected = docopt(docstr, argv, version=version,
+            return_spec=True)
+    opts = Values()
+    opts.argv = argv
+    parsed = pattern.flat() + collected
+    #assert not ( 'argv' in opts or 'flags' in opts or 'args' in opts),\
+    #        "Dont use 'argv', 'flags' or 'args'. "
+    opts.cmds, opts.flags, opts.args = get_optvalues(parsed, meta)
+    return opts
+
+def get_optvalues(opts, handlers={}):
+
+    """
+    Given docopt dict, return 1). an optparse-like values object
+    and (iow. with all short -o and long --opt)
+    2). something similar for all <arguments>.
+    """
+
+    cmds = []
+    flags, args = {}, {}
+    for opt in opts:
+        k = opt.name
+        v = opt.value
+        h = opt.meta if hasattr(opt, 'meta') and opt.meta else None
+        if k[0]+k[-1] == '<>':
+            k = k.strip('<>').replace('-', '_')
+            d = args
+        elif k.startswith('-'):
+            k = k.lstrip('-').replace('-', '_')
+            d = flags
+        elif k.isupper():
+            d = args
+        else:
+            if v:
+                cmds.append(k)
+            continue
+        if isinstance(v, basestring) and v and '=' in v[0]:
+            # allo access to subkey, value container for certain key
+            d[k] = Values({ })
+            for a in v:
+                p, d = a.split('=')
+                flags[k][p] = d
+        else:
+            if v:
+                if h and h in handlers:
+                    v = handlers[h](v)
+            d[k] = v
+    return cmds, Values(flags), Values(args)
 
 
 def get_output(ctx):
@@ -138,7 +199,7 @@ if __name__ == '__main__':
                     [default: plain].
     """
     import sys
-    opts = util.get_opts(docstr, version=__version__)
+    opts = get_opts(docstr, version=__version__)
     if not opts.cmds: opts.cmds = ['parseuri']
     sys.exit( main( opts.cmds[0], opts ) )
 

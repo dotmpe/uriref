@@ -1,13 +1,1 @@
-/htmlcov
-/.coverage
-/build
-/.build
-/uriref_testreport.html
-*.sw[po]
-*.pyc
-*.png
-#/doc/rfc*.txt
-#/doc/*.html
-/dist/
 MANIFEST
-#htmlcov

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 export PYTHONPATH=.:$PYTHONPATH
 
 ./bin/uriref-cli.py parseuri -O ptable 'http://example.net/path;param/name?query#fragment'
