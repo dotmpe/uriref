@@ -48,16 +48,17 @@ install_docopt()
 
 install_mkdoc()
 {
-  echo "Installing mkdoc"
-  pushd $SRC_PREFIX
-  git clone https://github.com/dotmpe/mkdoc.git
-  cd mkdoc
-  git checkout devel
-  PREFIX=~/usr/ ./configure && ./install.sh
-  popd
+  test -n "$MKDOC_BRANCH" || MKDOC_BRANCH=master
+  echo "Installing mkdoc ($MKDOC_BRANCH)"
+  (
+    cd $SRC_PREFIX
+    git clone https://github.com/dotmpe/mkdoc.git
+    cd mkdoc
+    git checkout $MKDOC_BRANCH
+    ./configure $PREFIX && ./install.sh
+  )
   rm Makefile
-  ln -s ~/usr/share/mkdoc/Mkdoc-full.mk Makefile
-  #make
+  ln -s $PREFIX/share/mkdoc/Mkdoc-full.mk Makefile
 }
 
 
