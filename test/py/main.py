@@ -103,7 +103,7 @@ testcases = [
         ('test_stdlib_compare', "fictional_urls out_in_the_wild_urls".split()),
 ]
 class TestCase(unittest.TestCase):
-    tests = [] 
+    tests = []
     #def setUp(self, test):
     #    print self, 'setUp', test
     def runTest(self):
@@ -127,8 +127,6 @@ for test_name, testsets in testcases:
                 setattr(TestCase, name, func)
                 TestCase.tests.append(name)
 
-#if __name__ == '__main__':
-#    unittest.main()
 
 def wrap_test_functions(testset, test_name='default',
         test_generator=None):
@@ -143,6 +141,9 @@ def wrap_test_functions(testset, test_name='default',
 
 
 if __name__ == '__main__':
+    unittest.main()
+    """
+TODO: fix coverage. Or trhow this all away.
     import HTMLTestRunner
     #HTMLTestRunner.main()
     fp = file('uriref_testreport.html', 'wb')
@@ -159,4 +160,5 @@ if __name__ == '__main__':
                 suite.addTest(test)
     #print suite
     runner.run(suite)
+    """
 

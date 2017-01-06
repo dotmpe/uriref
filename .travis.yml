@@ -1,20 +1,27 @@
-# Build cycle
+language: python
+
+python:
+  - "2.7"
 
 before_install: python setup.py build
 install:
+- "source ./install-dependencies.sh && install_mkdoc"
 - "source ./install-dependencies.sh && install_docopt"
+- pip install -r requirements.txt
+- pip install -r test-requirements.txt
 - python setup.py install
-#before_script: []
-script: ./test/main.sh
+
+before_script: []
+
+script:
+- make test
+
 #after_success: []
 #after_failure: []
 #after_script: []
 
-# Other params
 
-language: python
-python:
-- 2.7
+  # Other params
 
 #branches:
 #  only: []
@@ -25,7 +32,7 @@ env:
   global:
   - PYTHONPATH=/home/travis/.local/lib/python2.7/site-packages/:$PYTHONPATH
   - Build_Deps_Default_Paths=1
+  matrix:
   - ENV=
-  matrix: [] 
 
 

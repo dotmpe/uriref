@@ -1,1 +1,1 @@
-/srv/project-mpe/mkdoc/Mkdocs-minimal.mk
+../mkdoc/Mkdoc-full.mk

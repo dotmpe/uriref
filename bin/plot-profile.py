@@ -14,7 +14,10 @@ import sys
 
 datafile = sys.argv[1]
 output_basename = sys.argv[2]
-r = csv2rec(datafile, checkrows=0)
+try:
+    r = csv2rec(datafile, checkrows=0)
+except Exception, err:
+    raise Exception("Unable to parse CSV: %s: %s" %( datafile, err ))
 
 data = dict(
     stdlib=dict(),
@@ -87,8 +90,8 @@ ax.set_title('Time by iterations')
 ax.set_xticks(ind+width)
 ax.set_xticklabels( groups )
 
-ax.legend( 
-    (rects1[0], rects2[0]), 
+ax.legend(
+    (rects1[0], rects2[0]),
     ( 'stdlib','uriref',) )
 
 def autolabel(rects):

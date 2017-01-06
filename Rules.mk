@@ -16,6 +16,7 @@ DMK_$d              :=
 define python-urllib-profile 
 	if test ! -e $(BUILD); then mkdir $(BUILD); fi
 	python test/py/profile.py -csv | tee $@
+	test -s "$@" || { echo "Empty CSV results" >&2; exit 1; }
 endef
 
 #      ------------ -- 
@@ -50,18 +51,19 @@ test_$d:
 	@$(call log_line,info,$@,Starting tests..)
 	@\
 	cd $(DIR);\
-	PYTHONPATH=$$PYTHONPATH:src/py:test/py;\
-	TEST_PY=test/py/main.py;\
+	export PYTHONPATH=.:./test/py:$$PYTHONPATH;\
+	TEST_PY=./test/py/main.py;\
 	export TEST_LIB=uriref;\
     $(test-python);
 	@\
-	cd $(DIR);\
+	cd $(DIR); \
     [ -e htmlcov ] && { \
 		[ -e doc/htmlcov ] && rm -rf doc/htmlcov;\
     	mv htmlcov doc && rm .coverage;\
 	};\
-    [ -e uriref_testreport.html ] \
-    	&& mv uriref_testreport.html doc;
+	[ -e uriref_testreport.html ] \
+    	&& mv uriref_testreport.html doc \
+    	|| echo missing uriref_testreport.html
 	@$(call log_line,ok,$@)
 
 
@@ -76,7 +78,7 @@ test_$d:
 #
 CLN_$d              := \
 	$(shell find $/ -name '*.pyc') \
-	$(wildcard .coverage htmlcov dist MANIFEST)
+	$(wildcard .coverage.* htmlcov dist MANIFEST)
 
 
 #      ------------ -- 
