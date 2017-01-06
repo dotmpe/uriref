@@ -1,1 +1,5 @@
 MANIFEST
+.build/
+.coverage.*
+*.pyc
+*.png
