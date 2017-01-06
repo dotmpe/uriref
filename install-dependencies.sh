@@ -5,11 +5,23 @@ set -e
 test -z "$Build_Debug" || set -x
 
 test -z "$Build_Deps_Default_Paths" || {
-  test -n "$SRC_PREFIX" || SRC_PREFIX=$HOME/build
-  test -n "$PREFIX" || PREFIX=$HOME/.local
+
+  test -n "$SRC_PREFIX" || {
+    test -w /src/ \
+      && SRC_PREFIX=/src/ \
+      || SRC_PREFIX=$HOME/build
+  }
+
+  test -n "$PREFIX" || {
+    test -w /usr/local/ \
+      && PREFIX=/usr/local/ \
+      || PREFIX=$HOME/.local
+  }
 }
 
 test -n "$sudo" || sudo=
+test -z "$sudo" || pref="sudo $pref"
+test -z "$dry_run" || pref="echo $pref"
 
 test -n "$SRC_PREFIX" || {
   echo "Not sure where checkout"
@@ -21,35 +33,54 @@ test -n "$PREFIX" || {
   exit 1
 }
 
-test -d $SRC_PREFIX || ${sudo} mkdir -vp $SRC_PREFIX
-test -d $PREFIX || ${sudo} mkdir -vp $PREFIX
+test -d $SRC_PREFIX || ${pref} mkdir -vp $SRC_PREFIX
+test -d $PREFIX || ${pref} mkdir -vp $PREFIX
 
 
 install_docopt()
 {
-  test -n "$sudo" || install_f="--user"
+  test -n "$install_f" || install_f="$py_setup_f"
   git clone https://github.com/dotmpe/docopt-mpe.git $SRC_PREFIX/docopt-mpe
   ( cd $SRC_PREFIX/docopt-mpe \
       && git checkout 0.6.x \
-      && $sudo python ./setup.py install $install_f )
+      && $pref python ./setup.py install $install_f )
 }
+
+install_mkdoc()
+{
+  echo "Installing mkdoc"
+  pushd $SRC_PREFIX
+  git clone https://github.com/dotmpe/mkdoc.git
+  cd mkdoc
+  git checkout devel
+  PREFIX=~/usr/ ./configure && ./install.sh
+  popd
+  rm Makefile
+  ln -s ~/usr/share/mkdoc/Mkdoc-full.mk Makefile
+  #make
+}
+
 
 
 
 main_entry()
 {
-  test -n "$1" || set -- '-'
+  test -n "$1" || set -- all
 
-  case "$1" in '-'|python|project|docopt)
+  case "$1" in all|python|project|docopt)
       # Using import seems more robust than scanning pip list
       python -c 'import docopt' || { install_docopt || return $?; }
+    ;; esac
+
+  case "$1" in all|mkdoc)
+      install_mkdoc || return $?
     ;; esac
 
   echo "OK. All pre-requisites for '$1' checked"
 }
 
-
 test "$(basename $0)" = "install-dependencies.sh" && {
+  test -n "$1" || set -- all
   while test -n "$1"
   do
     main_entry "$1" || exit $?
