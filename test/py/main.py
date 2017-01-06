@@ -1,3 +1,6 @@
+"""
+TODO: better look at nose parameterized.
+"""
 import re
 import sys
 import unittest
@@ -141,6 +144,7 @@ def wrap_test_functions(testset, test_name='default',
 
 
 if __name__ == '__main__':
+    from ref import URIRefTestCase
     unittest.main()
     """
 TODO: fix coverage. Or trhow this all away.
