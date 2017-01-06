@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
     name = "uriref",
     packages = ["uriref"],
-    version = "0.0.2",
+    version = "0.0.3-dev-20170106", # uriref
     description = "Regex Based URI reference parsing",
     author = "Berend (mpe)",
     author_email = "berend@dotmpe.com",

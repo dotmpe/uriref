@@ -9,7 +9,7 @@ import uriref
 from uriref import util
 
 
-__version__ = '0.0.0'
+__version__ = '0.0.3-dev-20170106' # uriref
 
 
 def get_output(ctx):
@@ -138,7 +138,7 @@ if __name__ == '__main__':
                     [default: plain].
     """
     import sys
-    opts = util.get_opts(docstr)
+    opts = util.get_opts(docstr, version=__version__)
     if not opts.cmds: opts.cmds = ['parseuri']
     sys.exit( main( opts.cmds[0], opts ) )
 
