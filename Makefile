@@ -1,1 +1,1 @@
-/usr/local/share/mkdoc/Mkdoc-full.mk
+../mkdoc/Mkdoc-full.mk
