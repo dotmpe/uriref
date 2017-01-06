@@ -32,6 +32,7 @@ env:
   global:
   - PYTHONPATH=/home/travis/.local/lib/python2.7/site-packages/:$PYTHONPATH
   - Build_Deps_Default_Paths=1
+  - CS=dark
   matrix:
   - ENV=
 
