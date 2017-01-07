@@ -479,6 +479,17 @@ class URIRef(str):
 
 	The uriref project comes with a command line tool 'uriref-cli' that
 	pretty-prints a table of all parts given a uriref instance as argument.
+
+        TODO: this needs a nicer API.
+        This __str__ returns the normalized URI. What about unicode then?
+        Maybe add `original()` implementation, or remove __str__.
+        Simply use normalize. Also, move default schema settings (http port,
+        ftp stuff) to more pluggable setup.
+
+        Finally want comparison with various degrees of parsing:
+        - explicit default, or implicit
+        - handle localhost, file relative vs. absolute paths too
+        - URL query param ordering maybe, idem optionally for hash
 	"""
 
 	def __new__(type, *args, **kwds):
@@ -575,7 +586,7 @@ class URIRef(str):
 				return self.__groups__[attr]
 
 	#
-	def generate_signature(self):
+	def normalize(self):
 		sig = []
 		if self.scheme:
 			sig.extend((self.scheme, ':'))
@@ -609,7 +620,7 @@ class URIRef(str):
 	    pass
 
 	def __str__(self):
-		return "".join(self.generate_signature())
+            return "".join(self.normalize())
 
 
 ### Testing
