@@ -52,12 +52,13 @@ install_mkdoc()
   echo "Installing mkdoc ($MKDOC_BRANCH)"
   (
     cd $SRC_PREFIX
-    git clone https://github.com/dotmpe/mkdoc.git
+    test -e mkdoc ||
+      git clone https://github.com/dotmpe/mkdoc.git
     cd mkdoc
     git checkout $MKDOC_BRANCH
     ./configure $PREFIX && ./install.sh
   )
-  rm Makefile
+  rm Makefile || printf ""
   ln -s $PREFIX/share/mkdoc/Mkdoc-full.mk Makefile
 }
 
@@ -74,7 +75,8 @@ main_entry()
     ;; esac
 
   case "$1" in all|mkdoc)
-      install_mkdoc || return $?
+      test -e Makefile \
+        || install_mkdoc || return $?
     ;; esac
 
   echo "OK. All pre-requisites for '$1' checked"
