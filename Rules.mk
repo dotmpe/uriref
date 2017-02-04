@@ -58,6 +58,7 @@ test_$d:
     else \
 	    $(ll) Errors "$@" "$$(tail -1 test.log)"; \
 	    $(ll) Errors "$@" see test.log; \
+	    exit 1; \
     fi
 
 
