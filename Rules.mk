@@ -48,23 +48,17 @@ TEST_$d             += test_$d
 
 test_$d: DIR := $/
 test_$d:
-	@$(call log_line,info,$@,Starting tests..)
+	@$(ll) "info" "$@" "Starting python tests.."
 	@\
-	cd $(DIR);\
-	export PYTHONPATH=.:./test/py:$$PYTHONPATH;\
-	TEST_PY=./test/py/main.py;\
-	export TEST_LIB=uriref;\
-    $(test-python);
-	@\
-	cd $(DIR); \
-    [ -e htmlcov ] && { \
-		[ -e doc/htmlcov ] && rm -rf doc/htmlcov;\
-    	mv htmlcov doc && rm .coverage;\
-	};\
-	[ -e uriref_testreport.html ] \
-    	&& mv uriref_testreport.html doc \
-    	|| echo missing uriref_testreport.html
-	@$(call log_line,ok,$@)
+	PYTHONPATH=$$PYTHONPATH:src/py:test/py;\
+	TEST_PY=./test/py/main.py;TEST_LIB=uriref;\
+	$(test-python) 2> test.log
+	@if [ -n "$$(tail -1 test.log|grep OK)" ]; then \
+	    $(ll) Success "$@" "see" test.log; \
+    else \
+	    $(ll) Errors "$@" "$$(tail -1 test.log)"; \
+	    $(ll) Errors "$@" see test.log; \
+    fi
 
 
 #      ------------ -- 
