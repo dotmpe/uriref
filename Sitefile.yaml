@@ -1,4 +1,9 @@
 sitefile: 0.0.2
+upstream: '*'
+packages: 
+  - 'sitefile/context.coffee'
+  - 'cors.coffee'
+
 routes:
     ReadMe: 'rst2html:ReadMe'
     doc: 'static:doc'

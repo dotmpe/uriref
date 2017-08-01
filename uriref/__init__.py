@@ -337,18 +337,26 @@ class MalformedURLExpection(Exception):
 
 ### Functions to validate and parse URIRef strings
 
-def match(uriref):
+def match(uriref, allow_empty=False):
 	"""
 	Match given `uriref` string using a Regular Expression.
 
 	If the passed in string starts with a valid scheme sequence it is treated as
 	an absolute-URI, otherwise a relative one.
 
+	XXX: Allow-empty also returns a match on ``scheme:``, but w/o any uriref
+	groups. It would be better to recognize something else as empty like
+	':' '/' '?' or '#'.
+
 	Returns the match object or None.
 	"""
 
-	if scheme.match(uriref):
-		return absoluteURI.match(uriref)
+	m = scheme.match(uriref)
+	if m:
+		if not uriref[m.end():] and allow_empty:
+			return m
+		else:
+			return absoluteURI.match(uriref)
 	else:
 		return relativeURI.match(uriref)
 
@@ -495,12 +503,12 @@ class URIRef(str):
 	def __new__(type, *args, **kwds):
 		return str.__new__(type, *args)
 
-	def __init__(self, uri, opaque_targets=[]):
+	def __init__(self, uri, opaque_targets=[], allow_empty=False):
 		"Construct instance with match object and parts dictionary."
 		"`opaque_targets` indicates partnames which may 'default' to opaque_part."
 
 		str.__init__(uri)
-		self.__match__ = match(uri)
+		self.__match__ = match(uri, allow_empty)
 		if not self.__match__:
 			raise MalformedURLExpection("Unexpected format: %r" % uri)
 
@@ -588,10 +596,10 @@ class URIRef(str):
 	#
 	def normalize(self):
 		sig = []
-		if self.scheme:
+                if hasattr(self, 'scheme') and self.scheme:
 			sig.extend((self.scheme, ':'))
 
-		if self.host:
+                if hasattr(self, 'host') and self.host:
 			sig.append('//')
 			if self.userinfo:
 				sig.extend((str(self.userinfo), '@'))
@@ -599,16 +607,16 @@ class URIRef(str):
 			if self.port:
 				sig.extend((':', str(self.port)))
 
-		if self.path:
+                if hasattr(self, 'path') and self.path:
 			sig.append(str(self.path))
-		elif self.opaque_part:
+                elif hasattr(self, 'opaque_part') and self.opaque_part:
 			sig.append(str(self.opaque_part))
 		else:
 			sig.append('/')
 
-		if self.query:
+                if hasattr(self, 'query') and self.query:
 			sig.extend(('?', str(self.query)))
-		if self.fragment:
+                if hasattr(self, 'fragment') and self.fragment:
 			sig.extend(('#', str(self.fragment)))
 
 		return tuple(sig)

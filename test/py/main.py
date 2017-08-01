@@ -146,23 +146,4 @@ def wrap_test_functions(testset, test_name='default',
 if __name__ == '__main__':
     from ref import URIRefTestCase
     unittest.main()
-    """
-TODO: fix coverage. Or trhow this all away.
-    import HTMLTestRunner
-    #HTMLTestRunner.main()
-    fp = file('uriref_testreport.html', 'wb')
-    runner = HTMLTestRunner.HTMLTestRunner(
-                stream=fp,
-                title='URIRef test results',
-                description=''
-            )
-    suite = unittest.TestSuite()
-    for test_name, testset_names in testcases:
-        for testset_name in testset_names:
-            testset = globals()[testset_name]
-            for test in wrap_test_functions(testset, test_name):
-                suite.addTest(test)
-    #print suite
-    runner.run(suite)
-    """
 

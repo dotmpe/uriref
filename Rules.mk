@@ -46,6 +46,11 @@ $/doc/%.svg $/doc/%.png: $B%.csv
 TEST_$d             += test_$d
 .PHONY:                test_$d
 
+test_pytest_$d: DIR := $/
+test_pytest_$d:
+	@$(ll) "info" "$@" "Starting python tests.."
+	pytest test/py/main.py
+
 test_$d: DIR := $/
 test_$d:
 	@$(ll) "info" "$@" "Starting python tests.."
