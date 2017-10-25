@@ -1,7 +1,7 @@
 Python uriref
 ==============
 :version: 0.0.3-dev-20170106
-:last-update: 2017-01-06
+:last-update: 2017-10-25
 :description:
   URL and URN parser written in regular expressions.
   Based on RFC 2396 BNF terms, update to RFC 3986 planned but not started.
