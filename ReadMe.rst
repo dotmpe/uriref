@@ -6,30 +6,30 @@ Python uriref
   URL and URN parser written in regular expressions.
   Based on RFC 2396 BNF terms, update to RFC 3986 planned but not started.
 :license: FreeBSD
-:package status:
+:status:
   .. image:: https://requires.io/github/bvberkum/uriref/requirements.svg?branch=master
-     :target: https://requires.io/github/bvberkum/uriref/requirements/?branch=master
-     :alt: Requirements Status
+    :target: https://requires.io/github/bvberkum/uriref/requirements/?branch=master
+    :alt: Requirements Status
 
-  .. image:: https://img.shields.io/travis/bvberkum/uriref.png
-
-  .. image:: https://img.shields.io/github/license/bvberkum/uriref.svg
-     :alt: repo license
-
-  .. image:: https://img.shields.io/github/issues/bvberkum/uriref.svg
-     :alt: issues
-
-  .. image:: https://img.shields.io/github/commit-activity/y/bvberkum/uriref.svg
-     :alt: commits per year
-
-  .. image:: https://img.shields.io/maintenance/yes/2017.svg
-     :alt: maintained last year
-
-:repository:
+  .. image:: http://img.shields.io/travis/bvberkum/uriref.svg
+    :target: http://travis-ci.org/bvberkum/uriref
+    :alt: Build Status
 
   .. image:: https://badge.fury.io/gh/bvberkum%2Furiref.png
-     :target: http://badge.fury.io/gh/bvberkum%2Furiref
-     :alt: GIT
+    :target: http://badge.fury.io/gh/bvberkum%2Furiref
+    :alt: GIT
+
+  .. image:: https://img.shields.io/github/license/bvberkum/uriref.svg
+    :alt: repo license
+
+  .. image:: https://img.shields.io/github/issues/bvberkum/uriref.svg
+    :alt: issues
+
+  .. image:: https://img.shields.io/github/commit-activity/y/bvberkum/uriref.svg
+    :alt: commits per year
+
+  .. image:: https://img.shields.io/maintenance/yes/2017.svg
+    :alt: maintained last year
 
 
 This is an experimental library. Do not use it in production unless you are
