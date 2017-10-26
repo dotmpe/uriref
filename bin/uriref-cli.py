@@ -148,8 +148,12 @@ def H_parseuri(opts):
 def H_regex(opts):
 
     """
-    Print the regex (part), by ID. See scheme, relativeURI, absoluteURI
-    among other patterns translated from BNF.
+    Print the regex (part), by ID. See among other patterns translated from BNF:
+
+    - scheme, relativeURI, absoluteURI
+    - uric; unreserved + reserved + escaped, essentially the chars that make
+      up the URI parts.
+    - abs_path, hier_part, query, authority
     """
 
     if len(opts.argv) > 1:

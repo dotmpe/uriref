@@ -7,19 +7,28 @@ Python uriref
   Based on RFC 2396 BNF terms, update to RFC 3986 planned but not started.
 :license: FreeBSD
 :package status:
+  .. image:: https://requires.io/github/bvberkum/uriref/requirements.svg?branch=master
+     :target: https://requires.io/github/bvberkum/uriref/requirements/?branch=master
+     :alt: Requirements Status
 
-  .. image:: https://gemnasium.com/dotmpe/uriref.png
-     :target: https://gemnasium.com/dotmpe/uriref
-     :alt: Dependencies
+  .. image:: https://img.shields.io/travis/bvberkum/uriref.png
 
-  .. image:: https://secure.travis-ci.org/dotmpe/uriref.png
-     :target: https://travis-ci.org/dotmpe/uriref
-     :alt: Build
+  .. image:: https://img.shields.io/github/license/bvberkum/uriref.svg
+     :alt: repo license
+
+  .. image:: https://img.shields.io/github/issues/bvberkum/uriref.svg
+     :alt: issues
+
+  .. image:: https://img.shields.io/github/commit-activity/y/bvberkum/uriref.svg
+     :alt: commits per year
+
+  .. image:: https://img.shields.io/maintenance/yes/2017.svg
+     :alt: maintained last year
 
 :repository:
 
-  .. image:: https://badge.fury.io/gh/dotmpe%2Furiref.png
-     :target: http://badge.fury.io/gh/dotmpe%2Furiref
+  .. image:: https://badge.fury.io/gh/bvberkum%2Furiref.png
+     :target: http://badge.fury.io/gh/bvberkum%2Furiref
      :alt: GIT
 
 
