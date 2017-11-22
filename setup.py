@@ -6,7 +6,7 @@ setup(
     description = "Regex Based URI reference parsing",
     author = "Berend (mpe)",
     author_email = "berend@dotmpe.com",
-    url = "http://project.dotmpe.com/uriref",
+    url = "http://github.com/bvberkum/uriref",
 #    bug?_url = "https://github.com/dotmpe/uriref/issues",
 #    download_url = "",
     keywords = ["url", "uri"],

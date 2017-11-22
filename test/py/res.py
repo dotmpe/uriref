@@ -52,9 +52,9 @@ fictional_urls = [
             'example.org', 'userinfo': None, 'query': None, 'scheme': 'http',
             'port': None}
     ),
-    ( 'http://dotmpe.com/schema;v5/cllct;1#SomeType',
+    ( 'http://placitus.nl/schema;v5/cllct;1#SomeType',
     {'opaque_part': None, 'abs_path': None, 'fragment': 'SomeType', 'authority':
-            'dotmpe.com', 'net_path': '/schema;v5/cllct;1', 'host': 'dotmpe.com',
+            'placitus.nl', 'net_path': '/schema;v5/cllct;1', 'host': 'placitus.nl',
             'userinfo': None, 'query': None, 'scheme': 'http', 'port': None}
     ),
     ( '../relative/path/to/file',
@@ -106,8 +106,8 @@ fictional_urls = [
     ( 'file://localhost/translit/alexander-pope.criticism.edl',
     {
             'scheme': 'file',
-            'authority': 'localhost', 
-            'host': 'localhost', 
+            'authority': 'localhost',
+            'host': 'localhost',
             'net_path': '/translit/alexander-pope.criticism.edl',
             'userinfo': None, 'query': None, 'opaque_part': None, 'abs_path': None, 'fragment': None, 'port': None}
     ),
