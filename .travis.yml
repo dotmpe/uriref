@@ -10,11 +10,11 @@ addons:
 
 before_install: python setup.py build
 install:
-  - "source ./install-dependencies.sh && install_mkdoc"
-  - "source ./install-dependencies.sh && install_docopt"
-  - pip install -r requirements.txt
-  - pip install -r test-requirements.txt
-  - python setup.py install
+- "source ./install-dependencies.sh && install_mkdoc"
+- "source ./install-dependencies.sh && install_docopt"
+- test ! -e requirements.txt || pip install -r requirements.txt
+- test ! -e test-requirements.txt || pip install -r test-requirements.txt
+- python setup.py install
 
 before_script: []
 

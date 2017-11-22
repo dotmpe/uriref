@@ -1,26 +1,35 @@
 Python uriref
 ==============
 :version: 0.0.3-dev-20170106
-:last-update: 2017-01-06
+:last-update: 2017-10-25
 :description:
   URL and URN parser written in regular expressions.
   Based on RFC 2396 BNF terms, update to RFC 3986 planned but not started.
 :license: FreeBSD
-:package status:
+:status:
+  .. image:: https://requires.io/github/bvberkum/uriref/requirements.svg?branch=master
+    :target: https://requires.io/github/bvberkum/uriref/requirements/?branch=master
+    :alt: Requirements Status
 
-  .. image:: https://gemnasium.com/dotmpe/uriref.png
-     :target: https://gemnasium.com/dotmpe/uriref
-     :alt: Dependencies
+  .. image:: http://img.shields.io/travis/bvberkum/uriref.svg
+    :target: http://travis-ci.org/bvberkum/uriref
+    :alt: Build Status
 
-  .. image:: https://secure.travis-ci.org/dotmpe/uriref.png
-     :target: https://travis-ci.org/dotmpe/uriref
-     :alt: Build
+  .. image:: https://badge.fury.io/gh/bvberkum%2Furiref.png
+    :target: http://badge.fury.io/gh/bvberkum%2Furiref
+    :alt: GIT
 
-:repository:
+  .. image:: https://img.shields.io/github/license/bvberkum/uriref.svg
+    :alt: repo license
 
-  .. image:: https://badge.fury.io/gh/dotmpe%2Furiref.png
-     :target: http://badge.fury.io/gh/dotmpe%2Furiref
-     :alt: GIT
+  .. image:: https://img.shields.io/github/issues/bvberkum/uriref.svg
+    :alt: issues
+
+  .. image:: https://img.shields.io/github/commit-activity/y/bvberkum/uriref.svg
+    :alt: commits per year
+
+  .. image:: https://img.shields.io/maintenance/yes/2017.svg
+    :alt: maintained last year
 
 
 This is an experimental library. Do not use it in production unless you are

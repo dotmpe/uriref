@@ -309,10 +309,13 @@ grouped_expressions = merge_strings(grouped_partial_expressions)
 
 ### Regex objects for matching relative and absolute URIRef notations
 
-relativeURI = re.compile(r"^%(relativeURI)s(\# (?P<fragment> %(fragment)s))?$" % grouped_expressions, re.VERBOSE)
+relativeURI_re = r"^%(relativeURI)s(\# (?P<fragment> %(fragment)s))?$" % grouped_expressions
+absoluteURI_re = r"^%(absoluteURI)s(\# (?P<fragment> %(fragment)s))?$" % grouped_expressions
+
+relativeURI = re.compile(relativeURI_re, re.VERBOSE)
 "a URI with no scheme-part and optional fragment part"
 
-absoluteURI = re.compile(r"^%(absoluteURI)s(\# (?P<fragment> %(fragment)s))?$" % grouped_expressions, re.VERBOSE)
+absoluteURI = re.compile(absoluteURI_re, re.VERBOSE)
 "a URI with scheme-part and optional fragment part"
 
 

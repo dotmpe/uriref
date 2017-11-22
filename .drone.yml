@@ -1,15 +1,18 @@
 pipeline:
   xenial:
-    image: ubuntu:xenial
+    #image: ubuntu:xenial
+    image: bvberkum/docker-treebox:ubuntu-xenial
     commands:
       - apt-get update
       - DEBIAN_FRONTEND=noninteractive apt-get -qyy install python
+      - cd $DRONE_WORKSPACE
       - python setup.py build
       - export Build_Deps_Default_Paths=1
-      - source ./install-dependencies.sh && install_mkdoc
-      - source ./install-dependencies.sh && install_docopt
-      - pip install -r requirements.txt
-      - pip install -r test-requirements.txt
+      - . ./install-dependencies.sh && install_mkdoc
+      - . ./install-dependencies.sh && install_docopt
+      - ( cd /tmp/ && wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py )
+      - test ! -e requirements.txt || pip install -r requirements.txt
+      - test ! -e test-requirements.txt || pip install -r test-requirements.txt
       - python setup.py install
       - make test
     when:

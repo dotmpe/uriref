@@ -5,6 +5,9 @@
 
 """
 from optparse import Values
+import json
+import ruamel
+from ruamel import yaml
 
 from docopt import docopt
 import uriref
@@ -83,15 +86,18 @@ def get_output(ctx):
 
 
 def H_list_writer_formats(opts):
+    "List writer formats"
     for fmt in writers.keys():
         print fmt
 
 
 def H_relative(opts):
+    "Validate URI's"
 
     return validate_uris(opts, uriref.relativeURI)
 
 def H_absolute(opts):
+    "Validate URI's"
 
     return validate_uris(opts, uriref.absoluteURI)
 
@@ -111,6 +117,7 @@ def validate_uris(opts, regex):
 
 
 def H_parseuri(opts):
+    "Parse URI's and fill plus print output template. "
 
     status = 0
     outfile = get_output(opts.args)
@@ -138,9 +145,40 @@ def H_parseuri(opts):
     return status
 
 
+def H_regex(opts):
+
+    """
+    Print the regex (part), by ID. See among other patterns translated from BNF:
+
+    - scheme, relativeURI, absoluteURI
+    - uric; unreserved + reserved + escaped, essentially the chars that make
+      up the URI parts.
+    - abs_path, hier_part, query, authority
+    """
+
+    if len(opts.argv) > 1:
+        name = opts.argv[1]
+    else:
+        name = 'absoluteURI'
+
+    print uriref.grouped_expressions[name]
+
+
+def H_help(opts):
+    "Print docstring for subcommand handler"
+    k = 'H_'+opts.args.CMD
+    if k not in globals():
+        return 1
+    print 'uriref-cli.py', opts.args.CMD
+    print globals()[k].__doc__
+
+
 ### Writers
 
 writers = dict()
+
+
+# Simple writers
 
 def table_writer(uri, match, file, opts):
     print >>file, util.match_groupdict_table(uri, match)
@@ -154,17 +192,28 @@ def plain_writer(uri, match, file, opts):
 writers['plain'] = plain_writer
 
 
-#def json_writer(data, file, opts):
-#    kwds = {}
-#    if opts.flags.pretty:
-#        kwds.update(dict(indent=2))
-#    file.write(js.dumps(data, **kwds))
+def json_writer(uri, match, file, opts):
+    kwds = {}
+    if opts.flags.pretty:
+        kwds.update(dict(indent=2))
+    file.write(json.dumps(match.groupdict(), **kwds))
+writers['json'] = json_writer
 
-#def yaml_writer(data, file, opts):
-#    kwds = {}
-#    if opts.flags.pretty:
-#        kwds.update(dict(default_flow_style=False))
-#    yaml_safe_dump(data, file, **kwds)
+
+def yaml_dump(*args, **kwds):
+    dd = ruamel.yaml.RoundTripDumper
+    kwds.update(dict(
+        Dumper=dd
+    ))
+    return ruamel.yaml.dump(*args, **kwds)
+
+def yaml_writer(uri, match, file, opts):
+    kwds = {}
+    if opts.flags.pretty:
+        kwds.update(dict(default_flow_style=False))
+    data = match.groupdict()
+    yaml_dump(data, file, **kwds)
+writers['yaml'] = yaml_writer
 
 
 
@@ -187,8 +236,11 @@ if __name__ == '__main__':
     docstr = """
     Usage:
         uriref-cli.py [options] list-writer-formats
+        uriref-cli.py [options] regex [scheme|absoluteURI|relativeURI|NAME]
         uriref-cli.py [options] (absolute|relative) <urirefs>...
+        uriref-cli.py help CMD
         uriref-cli.py [options] [parseuri] [<urirefs>...]
+        uriref-cli.py -h
 
     Options:
       -q, --quiet   Quiet operations, non-zero exit on failure.
@@ -202,4 +254,3 @@ if __name__ == '__main__':
     opts = get_opts(docstr, version=__version__)
     if not opts.cmds: opts.cmds = ['parseuri']
     sys.exit( main( opts.cmds[0], opts ) )
-
