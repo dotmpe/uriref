@@ -510,6 +510,8 @@ class URIRef(str):
 			part = self.__groups__['opaque_part']
 		elif name == 'path':
 			part = self.path
+		elif name in grouped_expressions:
+			return None
 		else:
 			raise AttributeError, name
 		return part

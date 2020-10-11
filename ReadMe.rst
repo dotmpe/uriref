@@ -1,7 +1,7 @@
 Python uriref
 ==============
 :version: 0.0.3-dev-20170106
-:last-update: 2017-10-25
+:last-update: 2020-10-11
 :description:
   URL and URN parser written in regular expressions.
   Based on RFC 2396 BNF terms, update to RFC 3986 planned but not started.
@@ -59,6 +59,17 @@ Installation of library and `parseuri.py` is via::
   python setup.py install
 
 For lib source see `uriref <uriref/__init__.py>`__.
+
+Usage
+-----
+Examples::
+
+  uriref-cli.py -qs absolute <URL> # Quietly validate URL reference
+  uriref-cli.py --pretty <URL>     # Parse URI parts to human readable table
+  uriref-cli.py -O yaml <URL>      # Parse URI parts to YAML
+  uriref-cli.py --pretty -O json <URL> # etc.
+
+See also ``bin/examples.py``.
 
 Tests
 -----
