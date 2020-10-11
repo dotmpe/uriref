@@ -136,6 +136,8 @@ def H_parseuri(opts):
         uris.insert(0, './../path.ext;param#id')
         uris.insert(0, 'cid:some-content-id@example.org')
 
+    if opts.flags.pretty and opts.flags.output_format == 'plain':
+        opts.flags.output_format = 'ptable'
     writer = writers[ opts.flags.output_format ]
 
     for uri in uris:
