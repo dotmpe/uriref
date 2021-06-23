@@ -189,9 +189,10 @@ References
 
 """
 import re
-import urlparse as stdlib_urlparse
+import urllib
+#import urlparse as stdlib_urlparse
 
-import util
+from . import util
 
 
 # Expressions
@@ -268,13 +269,13 @@ def merge_strings(strings):
 
 	results = {}
 
-	names = strings.keys()
+	names = list(strings.keys())
 	while names:
 		# cycle through the list until all strings are resolved
 		name = names.pop(0)
 		try:
 			results[name] = (strings[name] % results)
-		except Exception, e:
+		except Exception as e:
 			names.append(name)
 			# one unformatted string left while every other string is merged:
 			assert name != names[0], 'Cannot resolve %s' % name
@@ -388,7 +389,7 @@ def urlparse(uriref, md=None):
 
 	params = ''
 
-	return stdlib_urlparse.ParseResult(
+	return urllib.parse.ParseResult(
 	        md['scheme'] or '',
 	        auth, path, params,
 	        md['query'] or '',
@@ -409,12 +410,12 @@ def isfragment(url, location=None):
 	"""Return true if URL links to a fragment.
 	"""
 
-	urlparts = stdlib_urlparse.urlsplit(url)
+	urlparts = urllib.parse.urlparse(url)
 	if not location and not urlparts[4] is None:
 		return False
 
 	elif location and urlparts[4]:
-		locparts = stdlib_urlparse.urlsplit(location)
+		locparts = urllib.parse.urlparse(location)
 		# scheme
 		if urlparts[0] and not urlparts[0] is locparts[0]:
 			return False
@@ -439,7 +440,7 @@ def get_hostname(url):
 	"""Return the hostname of the given `url`.
 	"""
 
-	hostname = stdlib_urlparse.urlsplit(url)[1]
+	hostname = urllib.parse.urlparse(url)[1]
 	if ':' in hostname:
 		hostname = hostname.split(':').pop(0)
 	return hostname
@@ -450,8 +451,8 @@ def onsamedomain(url1, url2):
 	domain (but perhaps in a different subdomain).
 	"""
 
-	url1parts = stdlib_urlparse.urlsplit(url1)
-	url2parts = stdlib_urlparse.urlsplit(url2)
+	url1parts = urllib.parse.urlparse(url1)
+	url2parts = urllib.parse.urlparse(url2)
 	host1, host2 = url1parts[1], url2parts[1]
 	host1, host2 = host1.split('.'), host2.split('.')
 
@@ -513,7 +514,7 @@ class URIRef(str):
 		elif name in grouped_expressions:
 			return None
 		else:
-			raise AttributeError, name
+			raise AttributeError(name)
 		return part
 
 	# Special 'groups'
@@ -615,43 +616,3 @@ class URIRef(str):
 
 	def __str__(self):
 		return "".join(self.generate_signature())
-
-
-### Testing
-
-def bug1():
-	"http://host"
-	m = absoluteURI.match("my://host/path")
-	gd = m.groupdict()
-	# problem 1, what should the net path be?
-	assert gd['net_path'] == '/path'
-	# my guess:
-	#assert gd['net_path'] == '//host/path', gd
-
-	# problem 2, this be a hostname:
-	m = absoluteURI.match("my://net")
-	gd = m.groupdict()
-	#assert gd['host'] == 'net', gd
-	# and possibly related:
-	#assert gd['net_path'] == '//net', gd
-	assert URIRef('my://net/path').net_path == '/path'
-	assert URIRef('my://net/path').netpath == '//net/path'
-
-def print_complete_expressions():
-	print "**relativeURI**::\n\t", r"^%(relativeURI)s(\# (?P<fragment> %(fragment)s))?$" % expressions
-	print
-	print "**absoluteURI**::\n\t", r"^%(absoluteURI)s(\# (?P<fragment> %(fragment)s))?$" % expressions
-	print
-	print "**abs_path**::\n\t", r"%(abs_path)s" % expressions
-	print
-	print "**net_path**::\n\t", r"%(net_path)s" % expressions
-	print
-	print "**scheme**::\n\t", r"%(scheme)s:" % expressions
-	print
-	print "**net_scheme**::\n\t", r"%(scheme)s:(\/\/)?" % expressions
-	print
-
-
-if __name__ == '__main__':
-	bug1()
-	print_complete_expressions()
