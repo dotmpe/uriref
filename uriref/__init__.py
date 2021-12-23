@@ -190,7 +190,6 @@ References
 """
 import re
 import urllib
-#import urlparse as stdlib_urlparse
 
 from . import util
 
@@ -555,10 +554,10 @@ class URIRef(str):
 	@property
 	def query_kwds(self):
 		"""
-		Use urlparse.parse_qs to parse the query part to dictionay,
+		Use urllib.parse.parse_qs to parse the query part to dictionay,
 		it returns values as lists (multiple occurences appended to unique key)
 		"""
-		return dict(**urlparse.parse_qs(self.query))
+		return dict(**urllib.parse.parse_qs(self.query))
 
 	@property
 	def netpath(self):
